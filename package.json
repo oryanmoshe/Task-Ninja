@@ -1,0 +1,27 @@
+{
+  "name": "task-ninja",
+  "version": "1.0.0",
+  "description": "![spp.js logo](https://raw.github.com/flashhawk/spp.js/dev/logo.png) ====== ### Welcome Spp.js Spp.js is a sample physics particle system engine for javascript.",
+  "main": "server.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stavlevy/Task-Ninja.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stavlevy/Task-Ninja/issues"
+  },
+  "homepage": "https://github.com/stavlevy/Task-Ninja#readme",
+  "dependencies": {
+    "connect": "^3.6.6",
+    "serve-static": "^1.13.2"
+  }
+}
