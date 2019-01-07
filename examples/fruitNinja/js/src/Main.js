@@ -74,7 +74,7 @@ function init()
 	handtracking = new HandTracking(topCanvas.width, topCanvas.height);
   handtracking.tracker.params.simple = true;
 	handtracking.addEventListener('handmove', handmove);
-	
+	initEvents();
   render();
 	enterGame();
 	
@@ -231,3 +231,26 @@ function initControl() {
   gui.close();
 };
 
+function touchHandler(event) {
+	var touch = event.changedTouches[0];
+
+	var simulatedEvent = document.createEvent("MouseEvent");
+			simulatedEvent.initMouseEvent({
+			touchstart: "mousedown",
+			touchmove: "mousemove",
+			touchend: "mouseup"
+	}[event.type], true, true, window, 1,
+			touch.screenX, touch.screenY,
+			touch.clientX, touch.clientY, false,
+			false, false, false, 0, null);
+
+	touch.target.dispatchEvent(simulatedEvent);
+	event.preventDefault();
+}
+
+function initEvents() {
+	document.addEventListener("touchstart", touchHandler, true);
+	document.addEventListener("touchmove", touchHandler, true);
+	document.addEventListener("touchend", touchHandler, true);
+	document.addEventListener("touchcancel", touchHandler, true);
+}
