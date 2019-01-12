@@ -8,10 +8,10 @@ FruitGame.Fruit=function()
 			texture, x,y, 
 			texture.width,
 			texture.height,
-			-texture.width*.5,
-			-texture.height*.5,
-			texture.width,
-			texture.height
+			-texture.width*.5 / 2,
+			-texture.height*.5 / 2,
+			texture.width / 2,
+			texture.height / 2
 		);
 	};
 	//this.onUpdate=null;
@@ -48,7 +48,7 @@ FruitGame.Fruit.prototype.init = function(x,y,life,texture,shadow,context)
 	this.shadow=shadow;
 	this.rotation=0;
 	this.scale=1;
-	this.radius=texture.width>=texture.height?texture.width*0.5:texture.height*0.5;
+	this.radius=texture.width>=texture.height/2?texture.width*0.5/2:texture.height*0.5/2;
 	this.radius*=this.scale;
 	this.bottomY=null;
 	

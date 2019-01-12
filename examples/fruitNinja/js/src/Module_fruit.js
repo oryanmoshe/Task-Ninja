@@ -49,7 +49,7 @@
 		var right = particleSystem.createParticle(FruitGame.Fruit);
 		right.init(target.position.x,target.position.y,Infinity,target.textureObj.r,assetsManager.shadow,middleContext);
 		right.velocity.reset(0, -speed);
-		right.velocity.rotate(20*Math.random());
+		right.velocity.rotate(-50*Math.random());
 		right.damp.reset(0, 0);
 		right.rotation=target.rotation;
 		right.bottomY=gameHeight+target.textureObj.r.height;
@@ -58,7 +58,7 @@
 		var left=  particleSystem.createParticle(FruitGame.Fruit);
 		left.init(target.position.x,target.position.y,Infinity,target.textureObj.l,assetsManager.shadow,middleContext);
 		left.velocity.reset(0, -(speed));
-		left.velocity.rotate(-20*Math.random());
+		left.velocity.rotate(50*Math.random());
 		left.damp.reset(0, 0);
 		left.rotation=target.rotation;
 		left.bottomY=gameHeight+target.textureObj.l.height;
@@ -93,7 +93,7 @@
 		
 		var p = fruitSystem.createParticle(FruitGame.Fruit);
 		p.velocity.reset(0, -(10 + Math.random() * 3));
-		p.velocity.rotate(8 - Math.random() * 16);
+		p.velocity.rotate(8 - Math.random() * 2);
 		p.damp.reset(0, 0);
 		p.addForce("g", gravity);
 

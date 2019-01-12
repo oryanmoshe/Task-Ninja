@@ -244,7 +244,7 @@ HT.Tracker.prototype.blackBorder = function(image){
 
 HT.Tracker.prototype.findFingerGraph = function(contour, gravity, image) {
   var d = [];
-  var res = 500;
+  var res = 720;
   var gx = gravity.x, gy = gravity.y;
   var len = contour.length, maxd = 0, mind = 10000;
   var img = image.origin.data;

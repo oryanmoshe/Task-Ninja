@@ -51,7 +51,7 @@ function resizeCanvas()
 
 function initParticles()
 {
-	for ( var i = 0; i < 500; i++)
+	for ( var i = 0; i < 720; i++)
 	{
 		var p = particleSystem.createParticle(SPP.SpriteImage);
         p.init(canvas.width*Math.random(), canvas.height*Math.random(),Infinity,texture,context);

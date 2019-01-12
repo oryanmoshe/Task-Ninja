@@ -65,7 +65,8 @@ function init()
     stats = new Stats();
     stats.domElement.style.position = 'absolute';
     stats.domElement.style.left = '0px';
-    stats.domElement.style.top = '0px';
+		stats.domElement.style.top = '0px';
+		stats.domElement.style.display = 'none';
     document.body.appendChild( stats.domElement );
 
 	
@@ -78,7 +79,7 @@ function init()
   render();
 	enterGame();
 	
-	initControl();
+	// initControl();
 };
 function enterGame()
 {
