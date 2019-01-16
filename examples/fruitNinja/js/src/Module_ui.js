@@ -65,11 +65,12 @@
 			bottomContext.fillStyle="yellow";
 			bottomContext.font="36px 'Arial'";
 			bottomContext.fillText("- Swipe to start -",330,650);
-			bottomContext.fillStyle="rgb(235, 63, 124)";
+			bottomContext.fillStyle="white";
 			return;
 		}
-		context.font="36px 'Roboto'";
-		context.fillText("  "+currScore,24,6);
+		context.font="36px 'Arial'";
+		context.fillText(currScore,74,gameHeight - 75);
+		// context.setTransform(1,0,Math.tan(175), 1, 0, 0)
 		// context.font="14px 'Roboto'";
 		// context.fillText("Best:  "+storage.highScore,13,50);
 		if (multiplayer){
@@ -92,7 +93,7 @@
 			ui_gameLifeLeft.regX=1;
 			ui_gameLifeLeft.regY=0;
 			ui_gameLifeLeft.scale=.5;
-			ui_gameLifeLeft.init(bottomLeftContext.canvas.width,8,Infinity,ui_gamelifeTexture,bottomLeftContext);
+			ui_gameLifeLeft.init(10, bottomLeftContext.canvas.height-150,Infinity,ui_gamelifeTexture,bottomLeftContext);
 
 
 			ui_scoreIconRight = particleSystem.createParticle(SPP.SpriteImage);
@@ -103,46 +104,56 @@
 			ui_gameLifeRight.regX=1;
 			ui_gameLifeRight.regY=0;
 			ui_gameLifeRight.scale=.5;
-			ui_gameLifeRight.init(bottomRightContext.canvas.width,8,Infinity,ui_gamelifeTexture,bottomRightContext);
+			ui_gameLifeRight.init(10, bottomRightContext.canvas.height-150,Infinity,ui_gamelifeTexture,bottomRightContext);
 		} else {
+			ui_hud = particleSystem.createParticle(SPP.SpriteImage);
+			ui_hud.regX=ui_hud.regY=0;
+			ui_hud.init(-30,gameHeight - 105,Infinity,assetsManager.hud,bottomContext);
+			ui_hud.scale = .5
+
 			ui_scoreIcon = particleSystem.createParticle(SPP.SpriteImage);
 			ui_scoreIcon.regX=ui_scoreIcon.regY=0;
-			ui_scoreIcon.init(10,10,Infinity,assetsManager.score,bottomContext);
-	
+			ui_scoreIcon.init(10,gameHeight - 75,Infinity,assetsManager.score,bottomContext);
+			ui_scoreIcon.scale = .5;
+
 			ui_gameLife = particleSystem.createParticle(SPP.SpriteImage);
 			ui_gameLife.regX=1;
 			ui_gameLife.regY=0;
 			ui_gameLife.scale=.5;
-			ui_gameLife.init(gameWidth,8,Infinity,ui_gamelifeTexture,bottomContext);
+			ui_gameLife.init(165, gameHeight-70,Infinity,ui_gamelifeTexture,bottomContext);
 		}
 		
 	};
 
     hideScoreUI=function()
 	{
-		if(ui_scoreIcon!=undefined)
+		if(window.ui_scoreIcon!=undefined)
 		{
-			ui_scoreIcon.life=0;
+			window.ui_scoreIcon.life=0;
 		}
-		if(ui_gameLife!=undefined)
+		if(window.ui_hud!=undefined)
 		{
-			ui_gameLife.life=0;
+			window.ui_hud.life=0;
 		}
-		if(ui_scoreIconLeft!=undefined)
+		if(window.ui_gameLife!=undefined)
 		{
-			ui_scoreIconLeft.life=0;
+			window.ui_gameLife.life=0;
 		}
-		if(ui_gameLifeLeft!=undefined)
+		if(window.ui_scoreIconLeft!=undefined)
 		{
-			ui_gameLifeLeft.life=0;
+			window.ui_scoreIconLeft.life=0;
 		}
-		if(ui_scoreIconRight!=undefined)
+		if(window.ui_gameLifeLeft!=undefined)
 		{
-			ui_scoreIconRight.life=0;
+			window.ui_gameLifeLeft.life=0;
 		}
-		if(ui_gameLifeRight!=undefined)
+		if(window.ui_scoreIconRight!=undefined)
 		{
-			ui_gameLifeRight.life=0;
+			window.ui_scoreIconRight.life=0;
+		}
+		if(window.ui_gameLifeRight!=undefined)
+		{
+			window.ui_gameLifeRight.life=0;
 		}
 	};
 

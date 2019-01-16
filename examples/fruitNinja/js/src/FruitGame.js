@@ -13,6 +13,7 @@ var middleCanvas;
 var middleContext;
 var bottomCanvas;
 var bottomContext;
+var bottomScoreContext;
 
 var topLeftCanvas;
 var topLeftContext;
@@ -20,6 +21,7 @@ var middleLeftCanvas;
 var middleLeftContext;
 var bottomLeftCanvas;
 var bottomLeftContext;
+var bottomLeftScoreContext;
 
 var topRightCanvas;
 var topRightContext;
@@ -27,6 +29,7 @@ var middleRightCanvas;
 var middleRightContext;
 var bottomRightCanvas;
 var bottomRightContext;
+var bottomRightScoreContext;
 
 var particleSystem;
 var fruitSystem;
