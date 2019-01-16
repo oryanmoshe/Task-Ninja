@@ -2,19 +2,97 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, user-scalable=no">
+<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 <style type="text/css">
 body,html {
 		height: 100%;
 		margin: 0;
 		padding: 0;
 		background-color: #000;
+		touch-action: none;
 		
 	}
+.hidden{
+	display: none;
+}
 #bottom{
-	
-	background-image: url(assets/bg.jpg);
+	/* background-image: url(assets/bg.jpg);
+	background-position-x: -100%;
+	transition: background-position-x 2s; */
+}
+.wrapper {
+  overflow: hidden;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('roboto.eot'); /* IE9 Compat Modes */
+  src: url('roboto.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('roboto.woff') format('woff'), /* Modern Browsers */
+  url('roboto.ttf')  format('truetype'), /* Safari, Android, iOS */
+  url('roboto.svg#svgFontName') format('svg'); /* Legacy iOS */
+}
+.regular-background {
+	background: url(assets/StartScreen_01.gif);
+	width: 100vw;
+	height: 100vh;
+	background-size: 100% 100%;
+	transition: display .2s;
+	/* animation: rainbow .5s steps(36) infinite, pulse .5s infinite; */
 }
 
+.sliding-background {
+	background: url(assets/BGLOOP.png) repeat-x;
+	background-size: auto 100vh;
+  height: 100vh;
+  width: 6394px;
+	animation: slide 400s linear infinite;
+	transition: display .2s;
+	/* animation: ; */
+}
+.wrapper.frenzy .sliding-background{
+	animation: slide 20s linear infinite;
+};
+.wrapper.frenzy:after{
+	content: "";
+	width: 100vw;
+	top: 0px;
+	left: 0px;
+	position: fixed;
+	height: 100vh;
+	animation: pulse .5s infinite;
+}
+.wrapper.frenzy{
+	width: 100vw;
+	top: 0px;
+	left: 0px;
+	position: fixed;
+	height: 100vh;
+	animation: rainbow .4s steps(36) infinite;
+}
+@keyframes slide {
+  0%{
+    transform: translate3d(0, 0, 0);
+  }
+  100%{
+    transform: translate3d(-75%, 0, 0);
+  }
+}
+@keyframes rainbow {
+ from { filter:hue-rotate(10deg);  }
+ to   { filter:hue-rotate(360deg); }
+}
+@keyframes pulse {
+  0% {
+    box-shadow: inset 0 0 0 0 #6666AA;
+  }
+  70% {
+      box-shadow: inset 0 0 100px 10px #6666AA;
+  }
+  100% {
+      box-shadow: inset 0 0 0 0 #6666AA;
+  }
+}
 #fork{
 	display: none;
 	position: absolute;
@@ -31,7 +109,7 @@ body,html {
 }
 #info
 {
-	display:none;
+	display:none !important;
 	position: absolute; 
 	left: 0%;
 	top: 0%;
@@ -114,13 +192,32 @@ video{
 <script type="text/javascript" src="js-handtracking/src/handtracking.js"></script> 
 </head>
 <body>
+<div class="wrapper">
+	<div class="regular-background">
+	</div>
+	<div class="sliding-background hidden">
+	</div>
+</div>
 <div id="info" style="display:none">Fruit Ninja for HTML5 canvas,Developed using the <a href="https://github.com/flashhawk/spp.js" target="_blank"> spp.js </a>open source engine。<a href="https://github.com/flashhawk/spp.js/tree/master/examples/FruitNinja" target="_blank">source download</a>. Powered with <a href="http://w3c.github.io/mediacapture-depth/" target="_blank">Media Capture Depth Extension API</a></div>
+
+
+<canvas class="canvas" id="bottom-right" style="display:none">Your borwser does not suport html5 canvans!</canvas>
+<canvas class="canvas" id="shadow-right" style="display:none">Your borwser does not suport html5 canvans!</canvas>
+<canvas class="canvas" id="middle-right" style="display:none">Your borwser does not suport html5 canvans!</canvas>
+<canvas class="canvas" id="top-right" style="display:none">Your borwser does not suport html5 canvans!</canvas>
+
 <canvas class="canvas" id="bottom" style="display:none">Your borwser does not suport html5 canvans!</canvas>
 <canvas class="canvas" id="shadow" style="display:none">Your borwser does not suport html5 canvans!</canvas>
 <canvas class="canvas" id="middle" style="display:none">Your borwser does not suport html5 canvans!</canvas>
 <canvas class="canvas" id="top" style="display:none">Your borwser does not suport html5 canvans!</canvas>
+
+<canvas class="canvas" id="bottom-left" style="display:none">Your borwser does not suport html5 canvans!</canvas>
+<canvas class="canvas" id="shadow-left" style="display:none">Your borwser does not suport html5 canvans!</canvas>
+<canvas class="canvas" id="middle-left" style="display:none">Your borwser does not suport html5 canvans!</canvas>
+<canvas class="canvas" id="top-left" style="display:none">Your borwser does not suport html5 canvans!</canvas>
+
 <canvas id="canvas" style="width:320px; height:240px; border:1px solid black; display:none" width="320" height="240" style="display:none"></canvas>
 <div id="loading" style="display:block" ></div>
-<video id="depth" autoplay="true" style="display:none;" src=""></video>
+<video id="depth" autoplay="true" style="display:block; z-index: 100000000000;top:0;left:0;position: absolute;" width='1080' height='720'src=""></video>
 </body>
 </html>

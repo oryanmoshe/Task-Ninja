@@ -15,6 +15,8 @@ FruitGame.AssetsManager=function()
 	var handleComplete=function()
 	{
 		var fruits=FruitGame.assets.fruits;
+		var fruitsLives=FruitGame.assets.fruitsLives;
+		var nextFruits=FruitGame.assets.nextFruits;
 		for(i=0;i<fruits.length;i++)
 		{
 			var obj={};
@@ -22,6 +24,8 @@ FruitGame.AssetsManager=function()
 			{
 				obj[fruitStateLabels[j]]=_this.loader.getResult(fruits[i]+fruitStateLabels[j]);
 			}
+			obj['life'] = fruitsLives[i];
+			obj['next'] = nextFruits[i];
 			_this.fruitsArray.push(obj);
 			_this.fruitsObj[fruits[i]]=obj;
 		}
@@ -53,6 +57,11 @@ FruitGame.AssetsManager=function()
 	};
 	this.getRandomFruit=function()
 	{
+		// return this.fruitsObj['donenew'];
 		return this.fruitsArray[this.fruitsArray.length*Math.random()>>0];
+	};
+	this.getFruitByName=function(fruit)
+	{
+		return this.fruitsObj[fruit];
 	};
 };

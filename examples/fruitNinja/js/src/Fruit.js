@@ -33,14 +33,14 @@ FruitGame.Fruit.prototype.update = function()
 	this.drawTexture(this.context,this.texture,0,0);
 	this.context.setTransform(1,0,0,1,0,0);
 	
-	if(this.position.y>this.bottomY&&this.bottomY!=null)
+	if(this.position.y>this.bottomY&&this.bottomY!=null || ((this.position.x<=0 || this.position.x>gameWidth)))
 	{
 		this.life=0;
 		return;
 	}
 	//if(this.onUpdate)this.onUpdate.apply(this);
 };
-FruitGame.Fruit.prototype.init = function(x,y,life,texture,shadow,context) 
+FruitGame.Fruit.prototype.init = function(x,y,life,texture,shadow,context,next=null,dropScore=1) 
 {
 	SPP.Particle.prototype.init.apply(this,[x,y,life]);
 	this.context=context;
@@ -51,6 +51,10 @@ FruitGame.Fruit.prototype.init = function(x,y,life,texture,shadow,context)
 	this.radius=texture.width>=texture.height/2?texture.width*0.5/2:texture.height*0.5/2;
 	this.radius*=this.scale;
 	this.bottomY=null;
+	this.next=next;
+	this.dropScore=dropScore;
+	this.createdAt=(new Date()).getTime();
+	this.autoCut=0;
 	
 	
 	this.rotationStep=(1-Math.random()*2)*0.1;
