@@ -11,7 +11,7 @@ function init()
 {
 	document.getElementById("loading").style.display='none';
 	document.getElementById("info").style.display='block';
-	
+
 	if (multiplayer){
 
 		topLeftCanvas=document.getElementById("top-left");
@@ -21,15 +21,15 @@ function init()
 		topLeftCanvas.style.width = 'auto';
 		topLeftContext=topLeftCanvas.getContext("2d");
 		topLeftContext.globalCompositeOperation = "lighter";
-		
-		
+
+
 		middleLeftCanvas=document.getElementById("middle-left");
 		middleLeftCanvas.style.display="block";
 		middleLeftCanvas.width=gameWidth / 2;
 		middleLeftCanvas.height=gameHeight;
 		middleLeftCanvas.style.width = 'auto';
 		middleLeftContext=middleLeftCanvas.getContext("2d");
-		
+
 		bottomLeftCanvas=document.getElementById("bottom-left");
 		bottomLeftCanvas.style.display="block";
 		// bottomLeftCanvas.style.dispaly="none";
@@ -40,10 +40,10 @@ function init()
 		bottomLeftContext.fillStyle="rgb(235, 63, 124)";
 		bottomLeftContext.textAlign="left";
 		bottomLeftContext.textBaseline="top";
-	
-	
-	
-	
+
+
+
+
 		topRightCanvas=document.getElementById("top-right");
 		topRightCanvas.style.display="block";
 		topRightCanvas.width=gameWidth / 2;
@@ -53,8 +53,8 @@ function init()
 		topRightCanvas.style.left = 'auto';
 		topRightContext=topRightCanvas.getContext("2d");
 		topRightContext.globalCompositeOperation = "lighter";
-		
-		
+
+
 		middleRightCanvas=document.getElementById("middle-right");
 		middleRightCanvas.style.display="block";
 		middleRightCanvas.width=gameWidth / 2;
@@ -63,7 +63,7 @@ function init()
 		middleRightCanvas.style.right = 0;
 		middleRightCanvas.style.left = 'auto';
 		middleRightContext=middleRightCanvas.getContext("2d");
-		
+
 		bottomRightCanvas=document.getElementById("bottom-right");
 		bottomRightCanvas.style.display="block";
 		// bottomRightCanvas.style.dispaly="none";
@@ -83,14 +83,14 @@ function init()
 		topCanvas.height=gameHeight;
 		topContext=topCanvas.getContext("2d");
 		topContext.globalCompositeOperation = "lighter";
-		
-		
+
+
 		middleCanvas=document.getElementById("middle");
 		middleCanvas.style.display="block";
 		middleCanvas.width=gameWidth;
 		middleCanvas.height=gameHeight;
 		middleContext=middleCanvas.getContext("2d");
-		
+
 		bottomCanvas=document.getElementById("bottom");
 		bottomCanvas.style.display="block";
 		// bottomCanvas.style.dispaly="none";
@@ -102,7 +102,7 @@ function init()
 		bottomContext.textBaseline="top";
 	}
 	//canvas
-	
+
 
 
 
@@ -120,7 +120,7 @@ function init()
 	bombSystem=new SPP.ParticleSystem();
 	bombSystem.start();
 	gravity = new SPP.Gravity(0.15);
-	
+
 	//data
 	if (typeof chrome.storage != "undefined")
 		storage = chrome.storage.local;
@@ -133,7 +133,7 @@ function init()
 	gameLife=5;
 	ui_gamelifeTexture=assetsManager["gamelife-5"];
 	gameLevel=0.1;
-	
+
     // fps
     stats = new Stats();
     stats.domElement.style.position = 'absolute';
@@ -161,7 +161,7 @@ function init()
 	initEvents();
   render();
 	enterGame();
-	
+
 	// initControl();
 };
 function enterGame()
@@ -180,7 +180,7 @@ function resetGameData()
 function startGame(e)
 {
 	hideStartGameUI();
-	
+
 	resetGameData();
 	showScoreUI();
 	gameState=GAME_PLAYING;
@@ -193,7 +193,7 @@ function renderTimer()
 	if(timer>=interval)
 	{
 		timer=0;
-		throwObject();	
+		throwObject();
 	}
 };
 function throwObject()
@@ -315,7 +315,7 @@ function handmove(e) {
 	console.log(e);
 }
 //render canvas
-function render() 
+function render()
 {
 	requestAnimationFrame(render);
 	handtracking.tick();
@@ -330,21 +330,21 @@ function render()
 		middleRightContext.clearRect(gameWidth / 2,0,gameWidth / 2,gameHeight);
 		bottomRightContext.clearRect(gameWidth / 2,0,gameWidth / 2,gameHeight);
 		showScoreTextUI(bottomRightContext, scoreRight);
-		
+
 	} else {
 		topContext.clearRect(0,0,gameWidth,gameHeight);
 		middleContext.clearRect(0,0,gameWidth,gameHeight);
 		bottomContext.clearRect(0,0,gameWidth,gameHeight);
 		showScoreTextUI(bottomContext, score);
 	}
-	
+
 	fruitSystem.render();
 	bombSystem.render();
 	particleSystem.render();
 	runAutomation();
 	Object.keys(bladeSystems).forEach(key => bladeSystems[key].render())
 	// bladeSystem.render();
-	
+
 	Object.keys(allBlades).forEach(key => buildColorBlade(allBlades[key], bladeWidth, key))
 	// bladePartic = {};
 	collideTest();

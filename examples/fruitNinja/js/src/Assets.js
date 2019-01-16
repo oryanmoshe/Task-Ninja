@@ -8,6 +8,7 @@ FruitGame.assets = {
     { id: "gametitle", src: "assets/gametitle.png" },
     { id: "shadow", src: "assets/shadow.png" },
     { id: "bomb", src: "assets/bomb.png" },
+    { id: "bomblight", src: "assets/bomb-light.png" },
     { id: "miss", src: "assets/miss.png" },
     { id: "star", src: "assets/star.png" },
     { id: "score", src: "assets/score.png" },
