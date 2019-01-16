@@ -15,8 +15,8 @@
 				* Math.cos(this.rotation - SPP.MathUtils.toRadian(135));
 		var py = this.position.y + r
 				* Math.sin(this.rotation - SPP.MathUtils.toRadian(135));
-		smoke.init(px, py, Infinity, assetsManager.star, this.context);
-		// smoke.init(px, py, Infinity, assetsManager.star, topContext);
+		// smoke.init(px, py, Infinity, assetsManager.star, this.context);
+		smoke.init(px, py, Infinity, assetsManager.star, topContext);
 		smoke.onUpdate = bombSmokeUpdate;
 		smoke.scale = 0.8;
 		smoke.damp.reset(0, 0);
@@ -34,12 +34,12 @@
 		}
 	};
 	var bombExplode = function(target) {
-		for ( var i = 0; i < 150; i++)
+		for ( var i = 0; i < 500; i++)
 		{
 			var smoke = particleSystem.createParticle(SPP.SpriteImage);
 			smoke.init(target.position.x, target.position.y, Infinity,
-					assetsManager.star, this.context);
-					// assetsManager.star, topContext);
+					// assetsManager.star, this.context);
+					assetsManager.star, topContext);
 			smoke.onUpdate = explodeSmokeUpdate;
 			smoke.scale = 2;
 			smoke.damp.reset(0, 0);
