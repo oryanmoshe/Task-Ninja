@@ -9,8 +9,26 @@
 		}
 	};
 	var bombUpdate = function() {
+		this.updatePic += 1/32
+		 this.texture = (Math.floor(this.updatePic) % 2) ?assetsManager.bomblight : assetsManager.bomb;
 		var smoke = particleSystem.createParticle(SPP.SpriteImage);
 		var r = 1.414 * assetsManager.bomb.width * 0.5 - 5;
+		var px = this.position.x + r
+				* Math.cos(this.rotation - SPP.MathUtils.toRadian(135));
+		var py = this.position.y + r
+				* Math.sin(this.rotation - SPP.MathUtils.toRadian(135));
+		// smoke.init(px, py, Infinity, assetsManager.star, this.context);
+		smoke.init(px, py, Infinity, assetsManager.star, topContext);
+		smoke.onUpdate = bombSmokeUpdate;
+		smoke.scale = 0.8;
+		smoke.damp.reset(0, 0);
+		smoke.velocity.reset(0, -(1 + Math.random() * 1));
+		smoke.velocity.rotate(360 * Math.random());
+		smoke.addForce("g", gravity);
+		//light
+
+		var smoke = particleSystem.createParticle(SPP.SpriteImage);
+		var r = 1.414 * assetsManager.bomblight.width * 0.5 - 5;
 		var px = this.position.x + r
 				* Math.cos(this.rotation - SPP.MathUtils.toRadian(135));
 		var py = this.position.y + r
@@ -62,6 +80,7 @@
 				assetsManager.shadow, context);
 				// assetsManager.shadow, middleContext);
 		p.bottomY = gameHeight + assetsManager.bomb.height;
+		p.updatePic = 0
 	};
 	// cut bomb
 	cutBomb = function(target) {
