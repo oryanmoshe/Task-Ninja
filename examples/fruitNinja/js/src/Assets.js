@@ -1,7 +1,7 @@
 FruitGame.assets = {
-  fruits:       ["donenew", "workingnew", "stucknew"],
+  fruits:       ["done", "working", "stuck"],
   fruitsLives:  [1,       2,        3],
-  nextFruits:   [null,   "donenew",   "workingnew"],
+  nextFruits:   [null,   "done",   "working"],
 
   other: [
     { id: "gameover", src: "assets/gameover.png" },
