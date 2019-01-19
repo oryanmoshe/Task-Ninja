@@ -105,7 +105,16 @@ function init()
 		bottomContext.fillStyle="white";
 		bottomContext.textAlign="left";
 		bottomContext.textBaseline="top";
-	
+		
+		textCanvas=document.getElementById("text");
+		textCanvas.style.display="block";
+		// textCanvas.style.dispaly="none";
+		textCanvas.width=gameWidth;
+		textCanvas.height=gameHeight;
+		textContext=textCanvas.getContext("2d");
+		textContext.fillStyle="white";
+		textContext.textAlign="left";
+		textContext.textBaseline="top";
 	//canvas
 
 
@@ -175,7 +184,7 @@ function init()
 	initEvents();
   render();
 	enterGame();
-
+	enterName();
 	// initControl();
 };
 function enterGame()
@@ -265,6 +274,69 @@ function levelUpdate()
 		gameLevel=0.1;
 	}
 };
+function neonWrite(text, ctx, x, y, fontSize=30){
+	ctx.shadowBlur = 5;
+	ctx.shadowColor = "white";
+	ctx.font = fontSize+"px 'Lucida Console', Monaco, monospace";
+	ctx.fillStyle = "rgb(187,124,245)"
+	ctx.fillText(text, x-2, y);
+	ctx.fillStyle = "rgb(166,57,225)"
+	ctx.fillText(text, x, y);
+	ctx.fillStyle = "white"
+	ctx.fillText(text, x+3, y);
+}
+function typeToScreen(text, x, y, delay=250, fontSize = 30){
+	return new Promise(resolve => {
+		textContext.fillStyle = "white";
+		textContext.font = fontSize+"px 'Lucida Console', Monaco, monospace";
+		var count = 0;
+		var chars;
+		function draw() {
+				count ++;
+				// Grab all the characters up to count
+				chars = text.substr(0, count);
+				// Clear the canvas each time draw is called
+				clearText(x-20, y-2, fontSize * text.length, fontSize+2);
+				// Draw the characters to the canvas
+				neonWrite(chars, textContext, x, y, fontSize);
+				// textContext.fillText(chars, x, y);
+				if (count <= text.length){
+					setTimeout(draw, delay);
+				} else {
+					resolve(true);
+				}
+			}
+			draw();
+	});
+}
+
+function clearText(x=0,y=0,width=gameWidth,height=gameHeight){
+	textContext.clearRect(x, y, width, height);
+}
+
+function flashInput(x, y, char, delay=250, fontSize=90){
+	var textWidth = textContext.measureText(char);
+	var spaceWidth = textContext.measureText(' ');
+	var offset = playerName.length * textWidth.width + (spaceWidth.width * playerName.length);
+	var text = (playerName+('_'.repeat(nameLength - playerName.length))).split('').join(' ');
+	clearText(x-2, y-2, textContext.measureText(text).width+4)
+	neonWrite(text, textContext, x, y, fontSize);
+				// textContext.fillText(text, x, y);
+	typeToScreen(playerName.length >= nameLength ? '' : char, offset + x, y, delay, fontSize).then(() => {
+		clearText(offset+(x-2), y-2, textWidth.width+4);
+		window.flashTimer=setTimeout(() => {
+			flashInput(x, y, char, delay, fontSize)
+		}, delay);
+	})
+}
+function enterName(){
+	var text = (playerName+('_'.repeat(nameLength - playerName.length))).split('').join(' ');
+	typeToScreen('Name:', 50, 300, 250, 90).then(() =>
+		typeToScreen(text, 50 + textContext.measureText('Name: ').width, 300, 250, 90).then(() =>
+			flashInput(50 + textContext.measureText('Name: ').width, 300, '_', 700, 90)
+		)
+	)
+}
 
 function gameOver(side='middle')
 {
@@ -419,6 +491,9 @@ function render()
 		middleContext.clearRect(0,0,gameWidth,gameHeight);
 		bottomContext.clearRect(0,0,gameWidth,gameHeight);
 		showScoreTextUI(bottomContext, score);
+	}
+	if (gameState === GAME_PLAYING){
+		clearText();
 	}
 
 	fruitSystem.render();
@@ -620,6 +695,16 @@ function touchHandler(event, touch, key) {
 	buildBladeParticle(touch.clientX, touch.clientY, key);
 	event.preventDefault();
 }
+function handleName(e){
+	if (((e.keyCode > 65 && e.keyCode < 90) || (e.keyCode > 48 && e.keyCode < 57))&& playerName.length < nameLength){
+		playerName += e.key.toUpperCase();
+	}
+	if (e.keyCode === 8){
+		playerName = playerName.slice(0, -1);
+	}
+	// e.preventDefault();
+};
+
 
 function initEvents() {
 	// topCanvas=document.getElementById("top");
@@ -641,8 +726,9 @@ function initEvents() {
 		topCanvas.addEventListener("touchcancel", touchesHandler, true);
 		document.body.addEventListener("keydown", (e) => {if(e.keyCode === 13){isAutomation = true}}, true);
 		document.body.addEventListener("keydown", (e) => {if(e.keyCode === 16){slowMo = !slowMo}}, true);
-		document.body.addEventListener("keydown", (e) => {if(e.keyCode === 8){transparency = !transparency}}, true);
+		document.body.addEventListener("keydown", (e) => {if(e.keyCode === 8 && gameState === GAME_PLAYING){transparency = !transparency}}, true);
 		document.body.addEventListener("keydown", (e) => {if(e.keyCode === 27){ultraSlice = !ultraSlice}}, true);
+		document.body.addEventListener("keydown", (e) => {handleName(e)}, true);
 	}
 }
 

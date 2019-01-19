@@ -13,7 +13,8 @@ var middleCanvas;
 var middleContext;
 var bottomCanvas;
 var bottomContext;
-var bottomScoreContext;
+var textCanvas;
+var textContext;
 
 var topLeftCanvas;
 var topLeftContext;
@@ -105,3 +106,5 @@ var ui_replayFruit;
 
 var transparency = false;
 var ultraSlice = false;
+var playerName='';
+var nameLength=3;
