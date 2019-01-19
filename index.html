@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, user-scalable=no">
+<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+<style type="text/css">
+body,html {
+		height: 100%;
+		margin: 0;
+		padding: 0;
+		background-color: #000;
+		touch-action: none;
+		
+	}
+.hidden{
+	display: none;
+}
+#bottom{
+	/* background-image: url(assets/bg.jpg);
+	background-position-x: -100%;
+	transition: background-position-x 2s; */
+}
+.wrapper {
+	width: 100vw;
+	top: 0px;
+	left: 0px;
+	position: fixed;
+	height: 100vh;
+  overflow: hidden;
+}
+.wrapper-left {
+  overflow: hidden;
+	width: 50vw;
+	top: 0px;
+	left: 0px;
+	position: fixed;
+	height: 100vh;
+}
+.wrapper-right {
+  overflow: hidden;
+	width: 50vw;
+	top: 0px;
+	left: 50vw;
+	position: fixed;
+	height: 100vh;
+}
+body.playing .seperator{
+	background: black;
+	width: 10px;
+	height: 100vh;
+	position: absolute;
+	top: 0;
+	left: 50%;
+	margin-left: -10px;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('roboto.eot'); /* IE9 Compat Modes */
+  src: url('roboto.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('roboto.woff') format('woff'), /* Modern Browsers */
+  url('roboto.ttf')  format('truetype'), /* Safari, Android, iOS */
+  url('roboto.svg#svgFontName') format('svg'); /* Legacy iOS */
+}
+.regular-background {
+	background: url(assets/StartScreen_02.gif);
+	width: 100vw;
+	height: 100vh;
+	background-size: 100% 100%;
+	transition: display .2s;
+	/* animation: rainbow .5s steps(36) infinite, pulse .5s infinite; */
+}
+
+.sliding-background {
+	background: url(assets/BGLOOP_02.jpg) repeat-x;
+	background-size: auto 100vh;
+  height: 100vh;
+  width: 10000vw;
+	animation: slide 8000s linear infinite;
+	transition: display .2s;
+	/* animation: ; */
+}
+.wrapper.frenzy:after{
+	content: "";
+	width: 100vw;
+	top: 0px;
+	left: 0px;
+	position: fixed;
+	height: 100vh;
+	animation: pulse .5s infinite;
+}
+.wrapper-left.frenzy:after{
+	content: "";
+	width: 50vw;
+	top: 0px;
+	left: 0px;
+	position: fixed;
+	height: 100vh;
+	animation: pulse .5s infinite;
+}
+.wrapper-right.frenzy:after{
+	content: "";
+	width: 50vw;
+	top: 0px;
+	left: 0px;
+	position: fixed;
+	height: 100vh;
+	animation: pulse .5s infinite;
+}
+.wrapper.frenzy{
+	animation: rainbow .4s steps(36) infinite;
+}
+.wrapper.frenzy .sliding-background{
+	animation: slide 300s linear infinite;
+}
+.wrapper-left.frenzy .sliding-background{
+	animation: slide 300s linear infinite;
+}
+.wrapper-right.frenzy .sliding-background{
+	animation: slide 300s linear infinite;
+}
+.wrapper-left.frenzy{
+	animation: rainbow .4s steps(36) infinite;
+}
+.wrapper-right.frenzy{
+	animation: rainbow .4s steps(36) infinite;
+}
+@keyframes slide {
+  0%{
+    transform: translate3d(0, 0, 0);
+  }
+  100%{
+    transform: translate3d(-10000vw, 0, 0);
+  }
+}
+@keyframes rainbow {
+ from { filter:hue-rotate(10deg);  }
+ to   { filter:hue-rotate(360deg); }
+}
+@keyframes pulse {
+  0% {
+    box-shadow: inset 0 0 0 0 #6666AA;
+  }
+  70% {
+      box-shadow: inset 0 0 100px 10px #6666AA;
+  }
+  100% {
+      box-shadow: inset 0 0 0 0 #6666AA;
+  }
+}
+#fork{
+	display: none;
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 149px;
+	height: 149px;
+	cursor: pointer;
+	background-image: url(assets/forkme.png);
+	z-index: 0;
+}
+#info a{
+	color: #666666;
+}
+#info
+{
+	display:none !important;
+	position: absolute; 
+	left: 0%;
+	top: 0%;
+	width: 100%;
+	height: 100%;
+	color:#555555;
+	font-size:13px;
+}
+#loading{
+	position: absolute; 
+	z-index: 0;
+	left: 50%;
+	top: 50%;
+	width: 32px;
+	height: 32px;
+	margin: -16px auto auto -16px;
+	background-image: url(assets/loading.gif);
+}
+.canvas{
+	display:none;
+	position: absolute; 
+	z-index: 0;
+	left: 0%;
+	top: 0%;
+	width: 100%;
+	height: 100%;
+	
+}
+video{
+	display:none;
+	position: absolute; 
+	z-index: 0;
+	left: 0%;
+	top: 0%;
+	width: 150px;
+	height: 100px;
+	margin: -250px auto auto -375px;
+	
+}
+</style>
+<title>Fruit Ninja HTML5 Canvas</title>
+
+<script src="https://www.gstatic.com/firebasejs/5.7.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.7.2/firebase-database.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyAYOtpgF1PqQi_izfB_-O34D1OdT9g98As",
+    authDomain: "taskninja-2743c.firebaseapp.com",
+    databaseURL: "https://taskninja-2743c.firebaseio.com",
+    projectId: "taskninja-2743c",
+    storageBucket: "taskninja-2743c.appspot.com",
+    messagingSenderId: "261944698079"
+  };
+  firebase.initializeApp(config);
+</script>
+<script src="js/libs/preloadjs-0.6.0.min.js"></script>
+<script src="js/libs/soundjs-0.6.0.min.js"></script>
+<script src="js/libs/TweenLite.min.js"></script>
+<script src="js/libs/EasePack.min.js"></script>
+<script src="js/libs/spp.min.js"></script>
+
+<script src="js/src/FruitGame.js"></script>
+<script src="js/src/ScoresController.js"></script>
+<script src="js/src/Assets.js"></script>
+<script src="js/src/AssetsManager.js"></script>
+<script src="js/src/Collide.js"></script>
+<script src="js/src/Fruit.js"></script>
+<script src="js/src/Module_fruit.js"></script>
+<script src="js/src/Module_bomb.js"></script>
+<script src="js/src/Module_collide.js"></script>
+<script src="js/src/Module_blade.js"></script>
+<script src="js/src/Module_ui.js"></script>
+<script src="js/src/Main.js"></script>
+<script src="js/src/ShadowRenderer.js"></script>
+
+</head>
+<body>
+<div class="wrapper">
+	<div class="regular-background">
+	</div>
+	<div class="sliding-background hidden">
+	</div>
+</div>
+<div class="wrapper-left">
+	<div class="sliding-background hidden">
+	</div>
+</div>
+<div class="wrapper-right">
+	<div class="sliding-background hidden">
+	</div>
+</div>
+<canvas class="canvas" id="bottom" style="display:none">Your borwser does not suport html5 canvans!</canvas>
+<canvas class="canvas" id="bottom-score" style="display:none">Your borwser does not suport html5 canvans!</canvas>
+<canvas class="canvas" id="shadow" style="display:none">Your borwser does not suport html5 canvans!</canvas>
+<canvas class="canvas" id="middle" style="display:none">Your borwser does not suport html5 canvans!</canvas>
+<canvas class="canvas" id="top" style="display:none">Your borwser does not suport html5 canvans!</canvas>
+
+<canvas class="canvas" id="bottom-right" style="display:none">Your borwser does not suport html5 canvans!</canvas>
+<canvas class="canvas" id="bottom-right-score" style="display:none">Your borwser does not suport html5 canvans!</canvas>
+<canvas class="canvas" id="shadow-right" style="display:none">Your borwser does not suport html5 canvans!</canvas>
+<canvas class="canvas" id="middle-right" style="display:none">Your borwser does not suport html5 canvans!</canvas>
+<canvas class="canvas" id="top-right" style="display:none">Your borwser does not suport html5 canvans!</canvas>
+
+<canvas class="canvas" id="bottom-left" style="display:none">Your borwser does not suport html5 canvans!</canvas>
+<canvas class="canvas" id="bottom-left-score" style="display:none">Your borwser does not suport html5 canvans!</canvas>
+<canvas class="canvas" id="shadow-left" style="display:none">Your borwser does not suport html5 canvans!</canvas>
+<canvas class="canvas" id="middle-left" style="display:none">Your borwser does not suport html5 canvans!</canvas>
+<canvas class="canvas" id="top-left" style="display:none">Your borwser does not suport html5 canvans!</canvas>
+
+<div id="loading" style="display:block" ></div>
+<div class="seperator"></div>
+</body>
+</html>
