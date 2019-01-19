@@ -1,4 +1,2 @@
-Based on the fruitNinja example of spp.js:
-* [spp.js](https://github.com/flashhawk/spp.js)
-* [fruitNinja](http://flashhawk.github.com/spp.js/examples/fruitNinja/)
-* Please init/update submodules after cloning.
+# monday.com Galactica
+This game is based on the fruit ninja example of spp.js
