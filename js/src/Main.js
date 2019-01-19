@@ -184,7 +184,7 @@ function init()
 	initEvents();
   render();
 	enterGame();
-	// enterName();
+	enterName();
 	// initControl();
 };
 function enterGame()
@@ -275,15 +275,17 @@ function levelUpdate()
 	}
 };
 function neonWrite(text, ctx, x, y, fontSize=30){
-	ctx.shadowBlur = 5;
-	ctx.shadowColor = "white";
+	ctx.shadowBlur = 50;
+	ctx.shadowColor = "rgb(68,79,170)";
 	ctx.font = fontSize+"px 'Lucida Console', Monaco, monospace";
 	ctx.fillStyle = "rgb(187,124,245)"
-	ctx.fillText(text, x-2, y);
-	ctx.fillStyle = "rgb(166,57,225)"
-	ctx.fillText(text, x, y);
+	ctx.fillText(text, x-4, y);
+	ctx.lineWidth = 2;
+	ctx.strokeStyle = "rgb(166,57,225)"
 	ctx.fillStyle = "white"
-	ctx.fillText(text, x+3, y);
+	ctx.fillText(text, x, y);
+	ctx.strokeText(text, x, y);
+	// ctx.fillText(text, x+3, y);
 }
 function typeToScreen(text, x, y, delay=250, fontSize = 30){
 	return new Promise(resolve => {
@@ -296,7 +298,7 @@ function typeToScreen(text, x, y, delay=250, fontSize = 30){
 				// Grab all the characters up to count
 				chars = text.substr(0, count);
 				// Clear the canvas each time draw is called
-				clearText(x-20, y-2, fontSize * text.length, fontSize+2);
+				clearText(x-30, y-30, fontSize * text.length +40, fontSize+90);
 				// Draw the characters to the canvas
 				neonWrite(chars, textContext, x, y, fontSize);
 				// textContext.fillText(chars, x, y);
@@ -319,11 +321,11 @@ function flashInput(x, y, char, delay=250, fontSize=90){
 	var spaceWidth = textContext.measureText(' ');
 	var offset = playerName.length * textWidth.width + (spaceWidth.width * playerName.length);
 	var text = (playerName+('_'.repeat(nameLength - playerName.length))).split('').join(' ');
-	clearText(x-2, y-2, textContext.measureText(text).width+4)
+	clearText(x-30, y-30, textContext.measureText(text).width+55, fontSize + 90)
 	neonWrite(text, textContext, x, y, fontSize);
 				// textContext.fillText(text, x, y);
 	typeToScreen(playerName.length >= nameLength ? '' : char, offset + x, y, delay, fontSize).then(() => {
-		clearText(offset+(x-2), y-2, textWidth.width+4);
+		clearText(offset+(x-30), y-30, textWidth.width+40, fontSize + 90);
 		window.flashTimer=setTimeout(() => {
 			flashInput(x, y, char, delay, fontSize)
 		}, delay);
