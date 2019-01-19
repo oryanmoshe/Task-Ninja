@@ -184,7 +184,7 @@ function init()
 	initEvents();
   render();
 	enterGame();
-	enterName();
+	// enterName();
 	// initControl();
 };
 function enterGame()
@@ -732,23 +732,23 @@ function initEvents() {
 	}
 }
 
-const clock = (time_warp = 1) => {
+// const clock = (time_warp = 1) => {
     
-	let starting_time = Date.now(),
-			offset = 0;
+// 	let starting_time = Date.now(),
+// 			offset = 0;
 				
-	let clock = {
+// 	let clock = {
 			
-			'tick' : () => (Date.now() - starting_time) * time_warp + offset,
+// 			'tick' : () => (Date.now() - starting_time) * time_warp + offset,
 			
-			'warp' : factor => {
-					offset = clock.tick();
-					starting_time = Date.now();
-					time_warp = factor;
-			}
+// 			'warp' : factor => {
+// 					offset = clock.tick();
+// 					starting_time = Date.now();
+// 					time_warp = factor;
+// 			}
 			
-	};
+// 	};
 	
-	return clock;
+// 	return clock;
 	
-};
+// };
