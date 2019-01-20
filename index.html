@@ -78,6 +78,24 @@ body.playing .seperator{
   width: 10000vw;
 	animation: slide 8000s linear infinite;
 	transition: display .2s;
+	z-index: 1;
+	position: absolute;
+	top: 0;
+	left: 0;
+	/* animation: ; */
+}
+
+.sliding-parallax {
+	background: url(assets/BGLOOP_B.PNG) repeat-x;
+	background-size: auto 100vh;
+  height: 100vh;
+  width: 10000vw;
+	animation: slide 4000s linear infinite;
+	transition: display .2s;
+	z-index: 2;
+	position: absolute;
+	top: 0;
+	left: 0;
 	/* animation: ; */
 }
 .wrapper.frenzy:after{
@@ -118,6 +136,15 @@ body.playing .seperator{
 }
 .wrapper-right.frenzy .sliding-background{
 	animation: slide 300s linear infinite;
+}
+.wrapper.frenzy .sliding-parallax{
+	animation: slide 200s linear infinite;
+}
+.wrapper-left.frenzy .sliding-parallax{
+	animation: slide 200s linear infinite;
+}
+.wrapper-right.frenzy .sliding-parallax{
+	animation: slide 200s linear infinite;
 }
 .wrapper-left.frenzy{
 	animation: rainbow .4s steps(36) infinite;
@@ -262,13 +289,19 @@ canvas#text::after{
 	</div>
 	<div class="sliding-background hidden">
 	</div>
+	<div class="sliding-parallax hidden">
+	</div>
 </div>
 <div class="wrapper-left">
 	<div class="sliding-background hidden">
 	</div>
+	<div class="sliding-parallax hidden">
+	</div>
 </div>
 <div class="wrapper-right">
 	<div class="sliding-background hidden">
+	</div>
+	<div class="sliding-parallax hidden">
 	</div>
 </div>
 <canvas class="canvas" id="bottom" style="display:none">Your borwser does not suport html5 canvans!</canvas>

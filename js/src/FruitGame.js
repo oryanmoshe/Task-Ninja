@@ -87,12 +87,13 @@ var autoIdentifier=30;
 
 var bladeCanvases = {};
 var bladeContexes = {};
-var multiplayer = false;
+var multiplayer = true;
 var lineDrawn = false;
 
 var startTime;
 var bladeHistory=[];
 var fruitHistory=[];
+var cutHistory=[];
 var bladeReplayIdentifier=100;
 var bombUpdate;
 
@@ -108,3 +109,4 @@ var transparency = false;
 var ultraSlice = false;
 var playerName='';
 var nameLength=3;
+var powerUpsHistory=[];

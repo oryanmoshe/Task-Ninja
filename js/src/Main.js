@@ -184,7 +184,7 @@ function init()
 	initEvents();
   render();
 	enterGame();
-	enterName();
+	// enterName();
 	// initControl();
 };
 function enterGame()
@@ -220,6 +220,8 @@ function startGame(e)
 	startTime = new Date().getTime();
 	bladeHistory = [];
 	fruitHistory = [];
+	cutHistory = [];
+	powerUpsHistory = [];
 
 	resetGameData();
 	showScoreUI();
@@ -400,7 +402,9 @@ function touchesHandler(e) {
 	const newBlades = {};
 	for(let i = 0; i< touches.length; i++){
 		var prefix = 'touch';
-		if (touches[i].identifier >= bladeReplayIdentifier){
+		if (touches[i].identifier >= bladeReplayIdentifier + autoIdentifier){
+			prefix = 'autoreplay'
+		} else if (touches[i].identifier >= bladeReplayIdentifier){
 			prefix = 'replay'
 		} else if (touches[i].identifier > autoIdentifier){
 			prefix = 'auto'
@@ -447,7 +451,7 @@ function render()
 		requestAnimationFrame(render);
 	}, slowMo ? 20 : 0)
 	// handtracking.tick();
-
+	powerUpsHistory.push({time: new Date().getTime(), slowMo, isAutomation, ultraSlice, transparency})
 	if (multiplayer){
 		topContext.clearRect(0,0,gameWidth,gameHeight);
 		middleContext.clearRect(0,0,gameWidth,gameHeight);
@@ -615,15 +619,62 @@ async function replayLastGame(){
 	gameState = REPLAY;
 	replayBlade();
 	replayFruits();
+	replayPowerUps();
+}
+async function replayPowerUps(){
+	powerUpsHistory.forEach(tp => {
+		setTimeout(() => {
+			slowMo = tp.slowMo;
+			isAutomation = tp.isAutomation;
+			ultraSlice = tp.ultraSlice;
+			transparency = tp.transparency;
+		}, tp.time - startTime);
+	})
 }
 async function replayBlade(){
 	bladeHistory.forEach(tp => {
 		setTimeout(() => {
-			var e = new TouchEvent('touchmove', {changedTouches: [new Touch({clientX: tp.x, clientY: tp.y, identifier: bladeReplayIdentifier, target: topCanvas})]});
+			var e = new TouchEvent('touchmove', {changedTouches: [new Touch({clientX: tp.x, clientY: tp.y, identifier: (tp.key.indexOf('auto') !== -1) ? bladeReplayIdentifier + autoIdentifier : bladeReplayIdentifier, target: topCanvas})]});
 			topCanvas.dispatchEvent(e);
 		}, tp.time - startTime);
 	})
 }
+function pointsDistance(p1, p2){
+	return Math.sqrt(Math.pow((p1.x - p2.x), 2) + Math.pow((p1.y - p2.y), 2));
+}
+function getCutDistanceInCm(){
+	var dist = 0;
+	for (let i = 0; i < bladeHistory.length - 1; i++){
+		var p1 = bladeHistory[i];
+		var p2 = bladeHistory[i+1];
+		dist += (pointsDistance(p1, p2) * 2.54 / 96)
+	}
+	return dist;
+}
+function getFruitsCount(){
+	var fruits = {};
+	fruitHistory.forEach(obj => {
+		if (!(obj.texture.name in fruits)){
+			fruits[obj.texture.name] = 1;
+		} else {
+			fruits[obj.texture.name]++;
+		}
+	});
+	return fruits;
+}
+
+function getCutsCount(){
+	var cuts = {};
+	cutHistory.forEach(obj => {
+		if (!(obj.name in cuts)){
+			cuts[obj.name] = 1;
+		} else {
+			cuts[obj.name]++;
+		}
+	});
+	return cuts;
+}
+
 async function replayFruits(){
 	fruitHistory.forEach(tp => {
 		setTimeout(() => {

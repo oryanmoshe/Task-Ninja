@@ -55,9 +55,15 @@
 		var slide = document.querySelector('.wrapper .sliding-background');
 		var slideLeft = document.querySelector('.wrapper-left .sliding-background');
 		var slideRight = document.querySelector('.wrapper-right .sliding-background');
+		var parallax = document.querySelector('.wrapper .sliding-parallax');
+		var parallaxLeft = document.querySelector('.wrapper-left .sliding-parallax');
+		var parallaxRight = document.querySelector('.wrapper-right .sliding-parallax');
 		slide.className = 'sliding-background hidden';
 		slideLeft.className = 'sliding-background hidden';
 		slideRight.className = 'sliding-background hidden';
+		parallax.className = 'sliding-parallax hidden';
+		parallaxLeft.className = 'sliding-parallax hidden';
+		parallaxRight.className = 'sliding-parallax hidden';
 		wrapper.className = 'wrapper';
 		wrapperLeft.className = 'wrapper-left';
 		wrapperRight.className = 'wrapper-right';
@@ -80,17 +86,24 @@
 				var wrapperRight = document.getElementsByClassName('wrapper-right')[0];
 				var slideLeft = document.querySelector('.wrapper-left .sliding-background');
 				var slideRight = document.querySelector('.wrapper-right .sliding-background');
+				var parallaxLeft = document.querySelector('.wrapper-left .sliding-parallax');
+				var parallaxRight = document.querySelector('.wrapper-right .sliding-parallax');
 				slideLeft.className = 'sliding-background';
+				parallaxLeft.className = 'sliding-parallax';
 				if (isAutomationLeft)
 					wrapperLeft.className = 'wrapper-left frenzy';
+
 				slideRight.className = 'sliding-background';
+				parallaxRight.className = 'sliding-parallax';
 				if (isAutomationRight)
 					wrapperRight.className = 'wrapper-right frenzy';
 
 			} else {
 				var wrapper = document.getElementsByClassName('wrapper')[0];
 				var slide = document.getElementsByClassName('sliding-background')[0];
+				var parallax = document.getElementsByClassName('sliding-parallax')[0];
 				slide.className = 'sliding-background';
+				parallax.className = 'sliding-parallax';
 				if (isAutomation)
 					wrapper.className = 'wrapper frenzy';
 
