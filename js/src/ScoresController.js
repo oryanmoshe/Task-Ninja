@@ -11,11 +11,29 @@ class ScoresController {
     });
   }
 
-  getScores(callback) {
+  filterObject(raw, allowed){
+    return allowed.map(function(v) { return raw[v]; });
+  }
+
+  topScores(){
+    debugger;
+    const that = this;
+    let topKeys = Object.keys(that.scores).sort(function(a, b) {
+        return that.scores[a].score < that.scores[b].score ? 1 : -1; })
+                .slice(0, 5);
+    const topScores = this.filterObject(that.scores, topKeys)
+    if(gameState == GAME_READY){
+      enterScores(topScores)
+    }
+    return topScores
+  }
+
+  getScores() {
     const that = this;
     const scoresRef = this.database.ref("scores/");
     scoresRef.once("value").then(function(snapshot) {
       that.saveScores(snapshot.val() || []);
+      that.topScores()
     });
   }
 
@@ -45,3 +63,4 @@ class ScoresController {
 }
 
 const scoresController = new ScoresController();
+scoresController.getScores()

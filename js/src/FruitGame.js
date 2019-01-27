@@ -14,7 +14,10 @@ var middleContext;
 var bottomCanvas;
 var bottomContext;
 var textCanvas;
+var scoreCanvas;
+
 var textContext;
+var scoreContext;
 
 var topLeftCanvas;
 var topLeftContext;
@@ -93,6 +96,7 @@ var lineDrawn = false;
 var startTime;
 var bladeHistory=[];
 var fruitHistory=[];
+var cutHistory=[];
 var bladeReplayIdentifier=100;
 var bombUpdate;
 
@@ -108,3 +112,4 @@ var transparency = false;
 var ultraSlice = false;
 var playerName='';
 var nameLength=3;
+var powerUpsHistory=[];

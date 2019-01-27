@@ -164,6 +164,7 @@
 		} else {
 			buildHalfFruit(target);
 		}
+		cutHistory.push({name: target.textureObj.name, time: new Date().getTime()});
 		// createjs.Sound.play("splatter");
 	};
 	missHandler=function(e)

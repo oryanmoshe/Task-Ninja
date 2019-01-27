@@ -71,60 +71,68 @@
     ui_startFruit.textureObj = textureObj;
     ui_startFruit.side = "middle";
 
-    TweenLite.to(ui_startFruit, 1, { scale: 1, alpha: 1, ease: Back.easeOut });
-    var wrapper = document.getElementsByClassName("wrapper")[0];
-    var wrapperLeft = document.getElementsByClassName("wrapper-left")[0];
-    var wrapperRight = document.getElementsByClassName("wrapper-right")[0];
-    var back = document.getElementsByClassName("regular-background")[0];
-    var slide = document.querySelector(".wrapper .sliding-background");
-    var slideLeft = document.querySelector(".wrapper-left .sliding-background");
-    var slideRight = document.querySelector(
-      ".wrapper-right .sliding-background"
-    );
-    slide.className = "sliding-background hidden";
-    slideLeft.className = "sliding-background hidden";
-    slideRight.className = "sliding-background hidden";
-    wrapper.className = "wrapper";
-    wrapperLeft.className = "wrapper-left";
-    wrapperRight.className = "wrapper-right";
-    back.className = "regular-background";
+		TweenLite.to(ui_startFruit,1,{scale:1,alpha:1,ease :Back.easeOut});
+		var wrapper = document.getElementsByClassName('wrapper')[0];
+		var wrapperLeft = document.getElementsByClassName('wrapper-left')[0];
+		var wrapperRight = document.getElementsByClassName('wrapper-right')[0];
+		var back = document.getElementsByClassName('regular-background')[0];
+		var slide = document.querySelector('.wrapper .sliding-background');
+		var slideLeft = document.querySelector('.wrapper-left .sliding-background');
+		var slideRight = document.querySelector('.wrapper-right .sliding-background');
+		var parallax = document.querySelector('.wrapper .sliding-parallax');
+		var parallaxLeft = document.querySelector('.wrapper-left .sliding-parallax');
+		var parallaxRight = document.querySelector('.wrapper-right .sliding-parallax');
+		slide.className = 'sliding-background hidden';
+		slideLeft.className = 'sliding-background hidden';
+		slideRight.className = 'sliding-background hidden';
+		parallax.className = 'sliding-parallax hidden';
+		parallaxLeft.className = 'sliding-parallax hidden';
+		parallaxRight.className = 'sliding-parallax hidden';
+		wrapper.className = 'wrapper';
+		wrapperLeft.className = 'wrapper-left';
+		wrapperRight.className = 'wrapper-right';
+		back.className = 'regular-background';
+		scoresController.getScores();
   };
 
-  hideStartGameUI = function() {
-    ui_startFruit.removeEventListener("dead", startGame);
-    if (ui_replayFruit)
-      ui_replayFruit.removeEventListener("dead", replayLastGame);
-    // TweenLite.to(ui_gameTitle.position,0.8,{y:-assetsManager.gametitle.height});
-    TweenLite.to(ui_newGame, 0.8, {
-      scale: 8,
-      alpha: 0,
-      onComplete: function() {
-        // ui_gameTitle.life=0;
-        ui_newGame.life = 0;
-      }
-    });
-    if (multiplayer) {
-      var wrapperLeft = document.getElementsByClassName("wrapper-left")[0];
-      var wrapperRight = document.getElementsByClassName("wrapper-right")[0];
-      var slideLeft = document.querySelector(
-        ".wrapper-left .sliding-background"
-      );
-      var slideRight = document.querySelector(
-        ".wrapper-right .sliding-background"
-      );
-      slideLeft.className = "sliding-background";
-      if (isAutomationLeft) wrapperLeft.className = "wrapper-left frenzy";
-      slideRight.className = "sliding-background";
-      if (isAutomationRight) wrapperRight.className = "wrapper-right frenzy";
-    } else {
-      var wrapper = document.getElementsByClassName("wrapper")[0];
-      var slide = document.getElementsByClassName("sliding-background")[0];
-      slide.className = "sliding-background";
-      if (isAutomation) wrapper.className = "wrapper frenzy";
-    }
-    var back = document.getElementsByClassName("regular-background")[0];
-    back.className = "regular-background hidden";
-  };
+
+	hideStartGameUI = function() {
+	 ui_startFruit.removeEventListener("dead", startGame);
+	 if (ui_replayFruit)
+		 ui_replayFruit.removeEventListener("dead", replayLastGame);
+	 // TweenLite.to(ui_gameTitle.position,0.8,{y:-assetsManager.gametitle.height});
+	 TweenLite.to(ui_newGame, 0.8, {
+		 scale: 8,
+		 alpha: 0,
+		 onComplete: function() {
+			 // ui_gameTitle.life=0;
+			 ui_newGame.life = 0;
+		 }
+	 });
+	 if (multiplayer) {
+		 var wrapperLeft = document.getElementsByClassName("wrapper-left")[0];
+		 var wrapperRight = document.getElementsByClassName("wrapper-right")[0];
+		 var slideLeft = document.querySelector(
+			 ".wrapper-left .sliding-background"
+		 );
+		 var slideRight = document.querySelector(
+			 ".wrapper-right .sliding-background"
+		 );
+		 slideLeft.className = "sliding-background";
+		 if (isAutomationLeft) wrapperLeft.className = "wrapper-left frenzy";
+		 slideRight.className = "sliding-background";
+		 if (isAutomationRight) wrapperRight.className = "wrapper-right frenzy";
+	 } else {
+		 var wrapper = document.getElementsByClassName("wrapper")[0];
+		 var slide = document.getElementsByClassName("sliding-background")[0];
+		 slide.className = "sliding-background";
+		 if (isAutomation) wrapper.className = "wrapper frenzy";
+	 }
+	 var back = document.getElementsByClassName("regular-background")[0];
+	 back.className = "regular-background hidden";
+	 clearScores()
+ };
+
 
   showScoreTextUI = function(context, currScore) {
     if (gameState == GAME_READY) {
@@ -144,7 +152,6 @@
     context.setTransform(1, 0, -0.2, 1, 0, 0);
     context.fillText(currScore, 220, gameHeight - 80);
     context.setTransform(1, 0, 0, 1, 0, 0);
-
     var side;
     if (context.canvas.id.indexOf("left") !== -1) {
       side = "left";
@@ -325,7 +332,7 @@
     ui_gameOver = particleSystem.createParticle(SPP.SpriteImage);
     ui_gameOver.init(
       gameWidth * 0.5,
-      gameHeight * 0.5,
+      gameHeight * 0.2,
       Infinity,
       assetsManager.gameover,
       topContext
@@ -333,12 +340,12 @@
     ui_gameOver.scale = 0;
     TweenLite.to(ui_gameOver, 0.8, {
       delay: 2,
-      scale: 1,
+      scale: 1.6,
       ease: Back.easeIn,
       onComplete: gameOverComplete
     });
-
-    enterNameDelay(5);
+		enterScoreDelay(4);
+    enterNameDelay(4);
     document.body.addEventListener("keydown",(e)=>startNewGame(e), true);
   };
 
@@ -348,16 +355,16 @@
     }
     if (e.keyCode === 13 && gameState === GAME_OVER ) {
       showStartGameUI();
-      clearText();
       hideScoreUI();
-      TweenLite.to(ui_gameOver, 0.8, {
+			typeToScreen(a)
+      TweenLite.to(ui_gameOver, 0.1, {
         scale: 0,
         ease: Back.easeIn,
         onComplete: gameoverUIHideComplete
       });
+			scoresController.insertScore(playerName, score);
       resetGameData();
-      scoresController.insertScore(playerName, score);
-      playerName = null;
+      playerName = '';
     }
   }
 
