@@ -59,11 +59,11 @@ FruitGame.AssetsManager=function()
 	};
 	this.getRandomFruit=function()
 	{
-		// return this.fruitsObj['done'];
+		// return this.fruitsObj['transparency'];
 		var ret = this.fruitsArray[this.fruitsArray.length*Math.random()>>0];
-		if (ret.name === 'automation'){
-			var rand = Math.floor((Math.random() * 10 + 1));
-			if (rand % 10 === 0 && !isAutomation){
+		if (ret.name === 'automation' || ret.name === 'slowMo' || ret.name === 'transparency'){
+			var rand = Math.floor((Math.random() * 30 + 1));
+			if (rand % 30 === 0 && !isAutomation && !slowMo && !transparency){
 				return ret;
 			}
 			return this.getRandomFruit();

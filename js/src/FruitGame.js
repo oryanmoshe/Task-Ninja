@@ -87,7 +87,7 @@ var autoIdentifier=30;
 
 var bladeCanvases = {};
 var bladeContexes = {};
-var multiplayer = true;
+var multiplayer = false;
 var lineDrawn = false;
 
 var startTime;
@@ -110,3 +110,6 @@ var ultraSlice = false;
 var playerName='';
 var nameLength=3;
 var powerUpsHistory=[];
+var showGood;
+var showingGood=false;
+var ui_hudPowerActive={};

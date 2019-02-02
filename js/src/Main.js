@@ -216,7 +216,10 @@ function resetGameData()
 function startGame(e)
 {
 	hideStartGameUI();
-
+	if (ui_replayFruit) {
+		ui_replayFruit.removeEventListener("dead", replayLastGame)
+		TweenLite.to(ui_replayFruit,.5,{scale:0,alpha:0,ease :Back.easeOut, onComplete: () => {ui_replayFruit.life = 0}});
+	}
 	startTime = new Date().getTime();
 	bladeHistory = [];
 	fruitHistory = [];
@@ -371,6 +374,9 @@ function gameOver(side='middle')
 		ui_gameLife.texture=ui_gamelifeTexture;
 	}
 	if(score>parseInt(storage["highScore"]))storage.highScore=score;
+
+	var rand = Math.floor((Math.random() * 99999 + 1));
+	createjs.Sound.play("gameOver"+((rand%5)+1));
 	showGameoverUI();
 };
 function gameOverComplete()
@@ -450,6 +456,16 @@ function render()
 	setTimeout(() => {
 		requestAnimationFrame(render);
 	}, slowMo ? 20 : 0)
+	if (!slowMo){
+		var slide = document.querySelector('.wrapper .sliding-background');
+		slide.className = 'sliding-background' + (gameState !== GAME_PLAYING && gameState !== REPLAY ? " hidden" : "")
+	} else {
+		var slide = document.querySelector('.wrapper .sliding-background');
+		slide.className = 'sliding-background stretch'
+		ui_hudPowerActive.texture = assetsManager.slowMoActive
+	}
+	if (!isAutomation && !slowMo && !transparency)
+		ui_hudPowerActive.texture = null
 	// handtracking.tick();
 	powerUpsHistory.push({time: new Date().getTime(), slowMo, isAutomation, ultraSlice, transparency})
 	if (multiplayer){
@@ -507,6 +523,7 @@ function render()
 	particleSystem.render();
 	if (transparency){
 		middleContext.globalAlpha = .3;
+		ui_hudPowerActive.texture = assetsManager.transparencyActive
 	} else {
 		middleContext.globalAlpha = 1;
 	}
@@ -525,11 +542,16 @@ function render()
 			var wrapClass = 'wrapper' + (key !== 'middle' ? '-' + key : '');
 			var wrapper = document.getElementsByClassName(wrapClass)[0];
 			if (!(key in automations)){
+				slowMo = true;
+				createjs.Sound.play("automationActivated");
 				automations[key] = new Date().getTime();
-				wrapper.className = wrapClass + ' frenzy';
-				createjs.Sound.play("automationMode");
+				setTimeout(() => {
+					slowMo = false;
+					wrapper.className = wrapClass + ' frenzy';
+					createjs.Sound.play("automationMode");
+				}, 2000)
 			} else {
-				if (new Date().getTime() - automations[key] > 10000){
+				if (new Date().getTime() - automations[key] > 12000){
 					delete automations[key];
 					if (key === 'left'){
 						isAutomationLeft = false;
@@ -573,6 +595,7 @@ function getRandomStartPoint(x, y, radius){
 }
 
 function runAutomation() {
+	ui_hudPowerActive.texture = assetsManager.automationActive
 	var l = fruitSystem.getParticles().length;
 	var uncutFalling = fruitSystem.getParticles().filter(p => p.dropScore > 0 && p.velocity.y > 1 && (new Date().getTime()) - p.autoCut > 350);
 	var lowestFruits = uncutFalling.sort((a, b) => a.position.y < b.position.y ? 1 : -1);
@@ -613,6 +636,10 @@ function runAutomation() {
 }
 async function replayLastGame(){
 	hideStartGameUI();
+	if (ui_startFruit) {
+		ui_startFruit.removeEventListener("dead", startGame)
+		TweenLite.to(ui_startFruit,.5,{scale:0,alpha:0,ease :Back.easeOut, onComplete: () => {ui_startFruit.life = 0}});
+	}
 	// bottomContext.clearRect(0,0,gameWidth,gameHeight);
 	resetGameData()
 	showScoreUI()
@@ -749,7 +776,7 @@ function touchHandler(event, touch, key) {
 	event.preventDefault();
 }
 function handleName(e){
-	if (((e.keyCode > 65 && e.keyCode < 90) || (e.keyCode > 48 && e.keyCode < 57))&& playerName.length < nameLength){
+	if (((e.keyCode >= 65 && e.keyCode <= 90) || (e.keyCode > 48 && e.keyCode < 57))&& playerName.length < nameLength){
 		playerName += e.key.toUpperCase();
 	}
 	if (e.keyCode === 8){
@@ -770,6 +797,10 @@ function initEvents() {
 		topRightCanvas.addEventListener("touchmove", touchesHandler, true);
 		topRightCanvas.addEventListener("touchend", touchesHandler, true);
 		topRightCanvas.addEventListener("touchcancel", touchesHandler, true);
+		topCanvas.addEventListener("touchstart", touchesHandler, true);
+		topCanvas.addEventListener("touchmove", touchesHandler, true);
+		topCanvas.addEventListener("touchend", touchesHandler, true);
+		topCanvas.addEventListener("touchcancel", touchesHandler, true);
 		document.body.addEventListener("keydown", (e) => {if(e.keyCode === 13){isAutomationLeft = true}}, true);
 		document.body.addEventListener("keydown", (e) => {if(e.keyCode === 8){isAutomationRight = true}}, true);
 	} else {

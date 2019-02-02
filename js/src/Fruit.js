@@ -24,18 +24,19 @@ FruitGame.Fruit.prototype.update = function()
 	this.context.translate(this.position.x-20,this.position.y-20);
 	//this.context.rotate(this.rotation);
 	this.context.scale(this.scale,this.scale);
-	if (this.textureObj && this.textureObj.name === 'automation'){
-		updateAutomation += 1/8;
+	if (this.textureObj && (this.textureObj.name === 'automation' || this.textureObj.name === 'slowMo' || this.textureObj.name === 'transparency')){
+		updateAutomation += 1/32;
 		if (Math.floor(updateAutomation) % 3 === 0){
 			// this.textureObj = assetsManager.fruitsObj.done;
-			this.texture = assetsManager.fruitsObj.done.w;
+			this.texture = assetsManager[this.textureObj.name + 'Blue'];
 		} else if (Math.floor(updateAutomation) % 3 === 1){
 			// this.textureObj = assetsManager.fruitsObj.working;
-			this.texture = assetsManager.fruitsObj.working.w;
+			this.texture = assetsManager[this.textureObj.name + 'Green'];
 		} else if (Math.floor(updateAutomation) % 3 === 2){
 			// this.textureObj = assetsManager.fruitsObj.stuck;
-			this.texture = assetsManager.fruitsObj.stuck.w;
+			this.texture = assetsManager[this.textureObj.name + 'Pink'];
 		}
+		this.scale = .5;
 	}
 	this.drawTexture(this.context,this.shadow,0,0);
 	this.context.setTransform(1,0,0,1,0,0);

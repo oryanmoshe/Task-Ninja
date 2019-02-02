@@ -56,14 +56,20 @@
 		var slideLeft = document.querySelector('.wrapper-left .sliding-background');
 		var slideRight = document.querySelector('.wrapper-right .sliding-background');
 		var parallax = document.querySelector('.wrapper .sliding-parallax');
+		var parallax2 = document.querySelector('.wrapper .sliding-parallax2');
 		var parallaxLeft = document.querySelector('.wrapper-left .sliding-parallax');
 		var parallaxRight = document.querySelector('.wrapper-right .sliding-parallax');
+		var parallaxLeft2 = document.querySelector('.wrapper-left .sliding-parallax2');
+		var parallaxRight2 = document.querySelector('.wrapper-right .sliding-parallax2');
 		slide.className = 'sliding-background hidden';
 		slideLeft.className = 'sliding-background hidden';
 		slideRight.className = 'sliding-background hidden';
 		parallax.className = 'sliding-parallax hidden';
 		parallaxLeft.className = 'sliding-parallax hidden';
 		parallaxRight.className = 'sliding-parallax hidden';
+		parallax2.className = 'sliding-parallax2 hidden';
+		parallaxLeft2.className = 'sliding-parallax2 hidden';
+		parallaxRight2.className = 'sliding-parallax2 hidden';
 		wrapper.className = 'wrapper';
 		wrapperLeft.className = 'wrapper-left';
 		wrapperRight.className = 'wrapper-right';
@@ -88,13 +94,17 @@
 				var slideRight = document.querySelector('.wrapper-right .sliding-background');
 				var parallaxLeft = document.querySelector('.wrapper-left .sliding-parallax');
 				var parallaxRight = document.querySelector('.wrapper-right .sliding-parallax');
+				var parallaxLeft2 = document.querySelector('.wrapper-left .sliding-parallax2');
+				var parallaxRight2 = document.querySelector('.wrapper-right .sliding-parallax2');
 				slideLeft.className = 'sliding-background';
 				parallaxLeft.className = 'sliding-parallax';
+				parallaxLeft2.className = 'sliding-parallax2';
 				if (isAutomationLeft)
 					wrapperLeft.className = 'wrapper-left frenzy';
 
 				slideRight.className = 'sliding-background';
 				parallaxRight.className = 'sliding-parallax';
+				parallaxRight2.className = 'sliding-parallax2';
 				if (isAutomationRight)
 					wrapperRight.className = 'wrapper-right frenzy';
 
@@ -102,8 +112,10 @@
 				var wrapper = document.getElementsByClassName('wrapper')[0];
 				var slide = document.getElementsByClassName('sliding-background')[0];
 				var parallax = document.getElementsByClassName('sliding-parallax')[0];
+				var parallax2 = document.getElementsByClassName('sliding-parallax2')[0];
 				slide.className = 'sliding-background';
 				parallax.className = 'sliding-parallax';
+				parallax2.className = 'sliding-parallax2';
 				if (isAutomation)
 					wrapper.className = 'wrapper frenzy';
 
@@ -217,8 +229,18 @@
 		} else {
 			ui_hud = particleSystem.createParticle(SPP.SpriteImage);
 			ui_hud.regX=ui_hud.regY=0;
-			ui_hud.init(-30,gameHeight - 105,Infinity,assetsManager.hud,bottomContext);
+			ui_hud.init(0,gameHeight - 105,Infinity,assetsManager.hud,bottomContext);
 			ui_hud.scale = .5
+
+			ui_hudPower = particleSystem.createParticle(SPP.SpriteImage);
+			ui_hudPower.regX=ui_hudPower.regY=0;
+			ui_hudPower.init(150,gameHeight - 107,Infinity,assetsManager.hudPower,bottomContext);
+			ui_hudPower.scale = .5
+
+			ui_hudPowerActive = particleSystem.createParticle(SPP.SpriteImage);
+			ui_hudPowerActive.regX=ui_hudPowerActive.regY=0;
+			ui_hudPowerActive.init(164,gameHeight - 87,Infinity,null,bottomContext);
+			ui_hudPowerActive.scale = .5
 
 			ui_scoreIcon = particleSystem.createParticle(SPP.SpriteImage);
 			ui_scoreIcon.regX=ui_scoreIcon.regY=0;
@@ -243,6 +265,14 @@
 		if(window.ui_hud!=undefined)
 		{
 			window.ui_hud.life=0;
+		}
+		if(window.ui_hudPower!=undefined)
+		{
+			window.ui_hudPower.life=0;
+		}
+		if(window.ui_hudPowerActive!=undefined)
+		{
+			window.ui_hudPowerActive.life=0;
 		}
 		if(window.ui_gameLife!=undefined)
 		{
@@ -272,6 +302,28 @@
 		ui_gameOver.init(gameWidth*0.5,gameHeight*0.5,Infinity,assetsManager.gameover,topContext);
 		ui_gameOver.scale=0;
 		TweenLite.to(ui_gameOver,0.8,{delay:2,scale:1,ease :Back.easeOut,onComplete:gameOverComplete});
+	};
+
+	showGood=function(x=gameWidth*0.5, y=gameHeight*0.5)
+	{
+		var rand = Math.floor((Math.random() * 9999999 + 1));
+		var type;
+		if (rand % 4 === 0){
+			type = "nice";
+		} else if (rand % 4 === 1){
+			type = "wow";
+		} else if (rand % 4 === 2){
+			type = "excellent";
+		} else if (rand % 4 === 3){
+			type = "zinman";
+		}
+		good_ui = particleSystem.createParticle(SPP.SpriteImage);
+		good_ui.init(x,y,Infinity,assetsManager[type+'Image'],topContext);
+		good_ui.scale=0;
+		TweenLite.to(good_ui,0.5,{scale:.2,ease :Back.easeOut,onComplete:() => {
+			TweenLite.to(good_ui,0.5,{delay:0,scale:0,ease :Back.easeIn, onComplete:() => {showingGood = false}});
+		}});
+		createjs.Sound.play(type);
 	};
 
 	var gameoverUIHideComplete=function()

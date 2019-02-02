@@ -75,6 +75,10 @@
 			left.velocity.rotate(50*Math.random());
 			left.rotation=target.rotation;
 		}
+		if (target.textureObj.name == 'automation' || target.textureObj.name == 'transparency' || target.textureObj.name == 'slowMo'){
+			right.scale = .5;
+			left.scale = .5;
+		}
 	};
 	//if miss fruit
 	var missUpdate=function()
@@ -138,9 +142,23 @@
 		} else {
 			score++;
 		}
+		var rand = Math.floor((Math.random() * 9999999 + 1));
+		if (rand % 10 === 0 && !showingGood && !isAutomation){
+			showGood(target.position.x, target.position.y);
+			showingGood=true;
+		}
 		target.removeEventListener("dead",missHandler);
 		if (target.textureObj.name === 'automation'){
 			isAutomation = true;
+		}
+		if (target.textureObj.name === 'transparency'){
+			createjs.Sound.play("transparency"+((rand%6)+1));
+			transparency = true;
+			setTimeout(() => transparency = false, 10000)
+		}
+		if (target.textureObj.name === 'slowMo'){
+			slowMo = true;
+			setTimeout(() => slowMo = false, 10000)
 		}
 		// buildJuice(target,(Math.random()*30>>0)+30);
 		// buildSplash(target);

@@ -65,9 +65,13 @@
 			smoke.velocity.rotate(360 * Math.random());
 			smoke.addForce("g", gravity);
 		}
-		createjs.Sound.play("bombExplode");
+		// createjs.Sound.play("bombExplode");
 	};
 	throwBomb = function(context) {
+		var rand = Math.floor((Math.random() * 999999 + 1));
+		if (rand % 10 === 0 && !isAutomation) {
+			createjs.Sound.play("dueDates");
+		}
 		var p = bombSystem.createParticle(FruitGame.Fruit);
 		var yv = -(10 + Math.random() * 3);
 		var rv = 8 - Math.random() * 16;

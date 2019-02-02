@@ -73,24 +73,44 @@ body.playing .seperator{
 
 .sliding-background {
 	background: url(assets/BGLOOP_02.jpg) repeat-x;
-	background-size: auto 100vh;
+	background-size: 2% 100vh;
   height: 100vh;
   width: 10000vw;
 	animation: slide 8000s linear infinite;
-	transition: display .2s;
+	/* transition: display .2s; */
 	z-index: 1;
+	position: absolute;
+	top: 0;
+	left: 0;
+	/* transition: background-size 2s; */
+	/* animation: ; */
+	transition: background-size 1s;
+	/* background-size: 2% 100vh; */
+}
+.stretch {
+	transition: background-size linear 10s;
+	background-size: 200% 100vh;
+}
+.sliding-parallax {
+	background: url(assets/BGLOOP_C.PNG) repeat-x;
+	background-size: auto 100vh;
+  height: 100vh;
+  width: 10000vw;
+	animation: slide 4000s linear infinite;
+	transition: display .2s;
+	z-index: 2;
 	position: absolute;
 	top: 0;
 	left: 0;
 	/* animation: ; */
 }
 
-.sliding-parallax {
+.sliding-parallax2 {
 	background: url(assets/BGLOOP_B.PNG) repeat-x;
 	background-size: auto 100vh;
   height: 100vh;
   width: 10000vw;
-	animation: slide 4000s linear infinite;
+	animation: slide 6000s linear infinite;
 	transition: display .2s;
 	z-index: 2;
 	position: absolute;
@@ -140,10 +160,19 @@ body.playing .seperator{
 .wrapper.frenzy .sliding-parallax{
 	animation: slide 200s linear infinite;
 }
+.wrapper.frenzy .sliding-parallax2{
+	animation: slide 200s linear infinite;
+}
 .wrapper-left.frenzy .sliding-parallax{
 	animation: slide 200s linear infinite;
 }
 .wrapper-right.frenzy .sliding-parallax{
+	animation: slide 200s linear infinite;
+}
+.wrapper-left.frenzy .sliding-parallax2{
+	animation: slide 200s linear infinite;
+}
+.wrapper-right.frenzy .sliding-parallax2{
 	animation: slide 200s linear infinite;
 }
 .wrapper-left.frenzy{
@@ -262,8 +291,10 @@ canvas#text::after{
   };
   firebase.initializeApp(config);
 </script>
-<script src="js/libs/preloadjs-0.6.0.min.js"></script>
-<script src="js/libs/soundjs-0.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PreloadJS/1.0.1/preloadjs.min.js"></script>
+<!-- <script src="js/libs/preloadjs-0.6.0.min.js"></script> -->
+<!-- <script src="js/libs/soundjs-0.6.0.min.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/SoundJS/1.0.2/soundjs.min.js"></script>
 <script src="js/libs/TweenLite.min.js"></script>
 <script src="js/libs/EasePack.min.js"></script>
 <script src="js/libs/spp.min.js"></script>
@@ -291,17 +322,23 @@ canvas#text::after{
 	</div>
 	<div class="sliding-parallax hidden">
 	</div>
+	<div class="sliding-parallax2 hidden">
+	</div>
 </div>
 <div class="wrapper-left">
 	<div class="sliding-background hidden">
 	</div>
 	<div class="sliding-parallax hidden">
 	</div>
+	<div class="sliding-parallax2 hidden">
+	</div>
 </div>
 <div class="wrapper-right">
 	<div class="sliding-background hidden">
 	</div>
 	<div class="sliding-parallax hidden">
+	</div>
+	<div class="sliding-parallax2 hidden">
 	</div>
 </div>
 <canvas class="canvas" id="bottom" style="display:none">Your borwser does not suport html5 canvans!</canvas>
