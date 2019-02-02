@@ -52,7 +52,7 @@
 		}
 	};
 	var bombExplode = function(target) {
-		for ( var i = 0; i < 500; i++)
+		for ( var i = 0; i < 150; i++)
 		{
 			var smoke = particleSystem.createParticle(SPP.SpriteImage);
 			smoke.init(target.position.x, target.position.y, Infinity,

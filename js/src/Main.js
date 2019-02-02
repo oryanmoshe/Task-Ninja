@@ -5,12 +5,12 @@ function loadAssets()
 {
 	assetsManager=new FruitGame.AssetsManager();
 	assetsManager.addEventListener("complete",init);
-	assetsManager.start();
-};
-function init()
-{
-	document.getElementById("loading").style.display='none';
-	if (multiplayer){
+		assetsManager.start();
+	};
+	function init()
+	{
+		document.getElementById("loading").style.display='none';
+		if (multiplayer){
 
 		topLeftCanvas=document.getElementById("top-left");
 		topLeftCanvas.style.display="block";
@@ -38,9 +38,6 @@ function init()
 		bottomLeftContext.fillStyle="white";
 		bottomLeftContext.textAlign="left";
 		bottomLeftContext.textBaseline="top";
-
-
-
 
 		topRightCanvas=document.getElementById("top-right");
 		topRightCanvas.style.display="block";
@@ -105,7 +102,7 @@ function init()
 		bottomContext.fillStyle="white";
 		bottomContext.textAlign="left";
 		bottomContext.textBaseline="top";
-		
+
 		textCanvas=document.getElementById("text");
 		textCanvas.style.display="block";
 		// textCanvas.style.dispaly="none";
@@ -115,13 +112,17 @@ function init()
 		textContext.fillStyle="white";
 		textContext.textAlign="left";
 		textContext.textBaseline="top";
+
+		scoreCanvas=document.getElementById("score-text");
+		scoreCanvas.style.display="block";
+		// textCanvas.style.dispaly="none";
+		scoreCanvas.width=gameWidth;
+		scoreCanvas.height=gameHeight;
+		scoreContext=scoreCanvas.getContext("2d");
+		scoreContext.fillStyle="white";
+		scoreContext.textAlign="left";
+		scoreContext.textBaseline="top";
 	//canvas
-
-
-
-
-
-
 
 
 	//particle system
@@ -176,7 +177,7 @@ function init()
 		topCanvas.addEventListener('mousemove', mousemove, false);
 		topCanvas.addEventListener('mouseleave', mouseleave, false);
 		topCanvas.addEventListener('mouseenter', mouseenter, false);
-	
+
 	// Use hand tracking or mouse to control
 	// handtracking = new HandTracking(topCanvas.width, topCanvas.height);
   // handtracking.tracker.params.simple = true;
@@ -210,6 +211,7 @@ function resetGameData()
 		ui_gamelifeTexture=assetsManager["gamelife-5"];
 		updateHud=0;
 	}
+	clearText();
 	updateAutomation=0;
 	gameLevel=0.1;
 }
@@ -279,71 +281,6 @@ function levelUpdate()
 		gameLevel=0.1;
 	}
 };
-function neonWrite(text, ctx, x, y, fontSize=30){
-	ctx.shadowBlur = 50;
-	ctx.shadowColor = "rgb(68,79,170)";
-	ctx.font = fontSize+"px 'Lucida Console', Monaco, monospace";
-	ctx.fillStyle = "rgb(187,124,245)"
-	ctx.fillText(text, x-4, y);
-	ctx.lineWidth = 2;
-	ctx.strokeStyle = "rgb(166,57,225)"
-	ctx.fillStyle = "white"
-	ctx.fillText(text, x, y);
-	ctx.strokeText(text, x, y);
-	// ctx.fillText(text, x+3, y);
-}
-function typeToScreen(text, x, y, delay=250, fontSize = 30){
-	return new Promise(resolve => {
-		textContext.fillStyle = "white";
-		textContext.font = fontSize+"px 'Lucida Console', Monaco, monospace";
-		var count = 0;
-		var chars;
-		function draw() {
-				count ++;
-				// Grab all the characters up to count
-				chars = text.substr(0, count);
-				// Clear the canvas each time draw is called
-				clearText(x-30, y-30, fontSize * text.length +40, fontSize+90);
-				// Draw the characters to the canvas
-				neonWrite(chars, textContext, x, y, fontSize);
-				// textContext.fillText(chars, x, y);
-				if (count <= text.length){
-					setTimeout(draw, delay);
-				} else {
-					resolve(true);
-				}
-			}
-			draw();
-	});
-}
-
-function clearText(x=0,y=0,width=gameWidth,height=gameHeight){
-	textContext.clearRect(x, y, width, height);
-}
-
-function flashInput(x, y, char, delay=250, fontSize=90){
-	var textWidth = textContext.measureText(char);
-	var spaceWidth = textContext.measureText(' ');
-	var offset = playerName.length * textWidth.width + (spaceWidth.width * playerName.length);
-	var text = (playerName+('_'.repeat(nameLength - playerName.length))).split('').join(' ');
-	clearText(x-30, y-30, textContext.measureText(text).width+55, fontSize + 90)
-	neonWrite(text, textContext, x, y, fontSize);
-				// textContext.fillText(text, x, y);
-	typeToScreen(playerName.length >= nameLength ? '' : char, offset + x, y, delay, fontSize).then(() => {
-		clearText(offset+(x-30), y-30, textWidth.width+40, fontSize + 90);
-		window.flashTimer=setTimeout(() => {
-			flashInput(x, y, char, delay, fontSize)
-		}, delay);
-	})
-}
-function enterName(){
-	var text = (playerName+('_'.repeat(nameLength - playerName.length))).split('').join(' ');
-	typeToScreen('Name:', 50, 300, 250, 90).then(() =>
-		typeToScreen(text, 50 + textContext.measureText('Name: ').width, 300, 250, 90).then(() =>
-			flashInput(50 + textContext.measureText('Name: ').width, 300, '_', 700, 90)
-		)
-	)
-}
 
 function gameOver(side='middle')
 {
@@ -355,7 +292,7 @@ function gameOver(side='middle')
 		fruitSystem.getParticles()[l].removeEventListener("dead",missHandler);
 	}
 	gameState=GAME_OVER;
-	
+
 	if (multiplayer){
 		if (side === 'left') {
 			gameLifeLeft=0;
@@ -477,7 +414,7 @@ function render()
 		middleLeftContext.clearRect(0,0,gameWidth/2,gameHeight);
 		bottomLeftContext.clearRect(0,0,gameWidth/2,gameHeight);
 		showScoreTextUI(bottomLeftContext, scoreLeft);
-		
+
 		topRightContext.clearRect(0,0,gameWidth/2,gameHeight);
 		middleRightContext.clearRect(0,0,gameWidth/2,gameHeight);
 		bottomRightContext.clearRect(0,0,gameWidth/2,gameHeight);
@@ -491,7 +428,7 @@ function render()
 			topLeftCanvas.style.display = 'block';
 			bottomLeftCanvas.style.display = 'block';
 			middleLeftCanvas.style.display = 'block';
-			
+
 			topRightCanvas.style.display = 'block';
 			bottomRightCanvas.style.display = 'block';
 			middleRightCanvas.style.display = 'block';
@@ -499,7 +436,7 @@ function render()
 			topLeftCanvas.style.display = 'none';
 			bottomLeftCanvas.style.display = 'none';
 			middleLeftCanvas.style.display = 'none';
-			
+
 			topRightCanvas.style.display = 'none';
 			bottomRightCanvas.style.display = 'none';
 			middleRightCanvas.style.display = 'none';
@@ -531,7 +468,7 @@ function render()
 		var keys = [];
 		if (isAutomation){
 			keys.push('middle');
-		} 
+		}
 		if (isAutomationLeft) {
 			keys.push('left');
 		}
@@ -574,7 +511,7 @@ function render()
 			interval = 1.8;
 		}
 	}
-	
+
 	Object.keys(bladeSystems).forEach(key => bladeSystems[key].render())
 	// bladeSystem.render();
 
@@ -705,7 +642,7 @@ function getCutsCount(){
 async function replayFruits(){
 	fruitHistory.forEach(tp => {
 		setTimeout(() => {
-			
+
 			const {yv, rv, x, y, life, texture, side, bottomY, context, isBomb} = tp;
 			const p = isBomb ? bombSystem.createParticle(FruitGame.Fruit) : fruitSystem.createParticle(FruitGame.Fruit);
 			p.velocity.reset(0, yv);
@@ -808,31 +745,41 @@ function initEvents() {
 		topCanvas.addEventListener("touchmove", touchesHandler, true);
 		topCanvas.addEventListener("touchend", touchesHandler, true);
 		topCanvas.addEventListener("touchcancel", touchesHandler, true);
-		document.body.addEventListener("keydown", (e) => {if(e.keyCode === 13){isAutomation = true}}, true);
+
+
+		document.body.addEventListener("keydown", (e) => {if(e.keyCode === 9){gameState = GAME_OVER}}, true);
+
+		//enter
+		document.body.addEventListener("keydown", (e) => {if(e.keyCode === 13 && gameState !== GAME_OVER){isAutomation = true}}, true);
+		//shift
 		document.body.addEventListener("keydown", (e) => {if(e.keyCode === 16){slowMo = !slowMo}}, true);
+		//backspace
 		document.body.addEventListener("keydown", (e) => {if(e.keyCode === 8 && gameState === GAME_PLAYING){transparency = !transparency}}, true);
+		//escape
 		document.body.addEventListener("keydown", (e) => {if(e.keyCode === 27){ultraSlice = !ultraSlice}}, true);
-		document.body.addEventListener("keydown", (e) => {handleName(e)}, true);
+		if(gameState==GAME_OVER){
+
+		}
 	}
 }
 
 // const clock = (time_warp = 1) => {
-    
+
 // 	let starting_time = Date.now(),
 // 			offset = 0;
-				
+
 // 	let clock = {
-			
+
 // 			'tick' : () => (Date.now() - starting_time) * time_warp + offset,
-			
+
 // 			'warp' : factor => {
 // 					offset = clock.tick();
 // 					starting_time = Date.now();
 // 					time_warp = factor;
 // 			}
-			
+
 // 	};
-	
+
 // 	return clock;
-	
+
 // };

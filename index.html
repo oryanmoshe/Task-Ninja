@@ -11,7 +11,7 @@ body,html {
 		padding: 0;
 		background-color: #000;
 		touch-action: none;
-		
+
 	}
 .hidden{
 	display: none;
@@ -221,7 +221,7 @@ body.playing .seperator{
 #info
 {
 	display:none !important;
-	position: absolute; 
+	position: absolute;
 	left: 0%;
 	top: 0%;
 	width: 100%;
@@ -230,7 +230,7 @@ body.playing .seperator{
 	font-size:13px;
 }
 #loading{
-	position: absolute; 
+	position: absolute;
 	z-index: 0;
 	left: 50%;
 	top: 50%;
@@ -241,24 +241,24 @@ body.playing .seperator{
 }
 .canvas{
 	display:none;
-	position: absolute; 
+	position: absolute;
 	z-index: 0;
 	left: 0%;
 	top: 0%;
 	width: 100%;
 	height: 100%;
-	
+
 }
 video{
 	display:none;
-	position: absolute; 
+	position: absolute;
 	z-index: 0;
 	left: 0%;
 	top: 0%;
 	width: 150px;
 	height: 100px;
 	margin: -250px auto auto -375px;
-	
+
 }
 canvas#text:hover{
 	transition: all 1s;
@@ -270,7 +270,7 @@ canvas#text::after{
   top:0; left:0; right:0; bottom: 0;
   background: radial-gradient(0 0,circle farthest-side, rgba(255,255,255,0) 90%,rgba(255,255,255,.8) 98%,rgba(255,255,255,0) 100%) no-repeat;
   background: radial-gradient(circle farthest-side at 0 0, rgba(255,255,255,0) 90%,rgba(255,255,255,.8) 98%,rgba(255,255,255,0) 100%) no-repeat;
-  background-position: inherit; 
+  background-position: inherit;
   -webkit-mask: url('http://dev.iamvdo.me/newLogoCSS3create2.png') center;
   mask: url('#mask-firefox');
 }
@@ -309,6 +309,7 @@ canvas#text::after{
 <script src="js/src/Module_bomb.js"></script>
 <script src="js/src/Module_collide.js"></script>
 <script src="js/src/Module_blade.js"></script>
+<script src="js/src/Module_letters.js"></script>
 <script src="js/src/Module_ui.js"></script>
 <script src="js/src/Main.js"></script>
 <script src="js/src/ShadowRenderer.js"></script>
@@ -341,6 +342,8 @@ canvas#text::after{
 	<div class="sliding-parallax2 hidden">
 	</div>
 </div>
+<canvas class="canvas" id="score-text" style="display:none">Your borwser does not suport html5 canvans!</canvas>
+
 <canvas class="canvas" id="bottom" style="display:none">Your borwser does not suport html5 canvans!</canvas>
 <canvas class="canvas" id="text" style="display:none">Your borwser does not suport html5 canvans!</canvas>
 <canvas class="canvas" id="shadow" style="display:none">Your borwser does not suport html5 canvans!</canvas>

@@ -14,7 +14,10 @@ var middleContext;
 var bottomCanvas;
 var bottomContext;
 var textCanvas;
+var scoreCanvas;
+
 var textContext;
+var scoreContext;
 
 var topLeftCanvas;
 var topLeftContext;
