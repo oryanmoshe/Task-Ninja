@@ -79,5 +79,5 @@ FruitGame.assets = {
   ]
 };
 letters.forEach(l => {
-  // FruitGame.assets.other.push({id: l, src: `assets/sound/abc/${l}.mp3`})
+  FruitGame.assets.other.push({id: l, src: `assets/sound/abc/${l}.mp3`})
 })

@@ -1,8 +1,10 @@
 language: node_js
 node_js:
   - "node"
+install:
+  - "npm i uglify-es -g"
 script:
-  -
+  - "uglifyjs -m toplevel,eval -c -o public/dist/bundle.js public/js/src/FruitGame.js public/js/src/*.js"
 deploy:
   provider: firebase
   token:
