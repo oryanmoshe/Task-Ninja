@@ -12,7 +12,7 @@ FruitGame.AssetsManager=function()
 	this.sounds={};
 	this.loader = new createjs.LoadQueue();
 	this.loader.installPlugin(createjs.Sound);
-	this.loader.setMaxConnections(10);
+	this.loader.setMaxConnections(20);
 	var handleComplete=function()
 	{
 		var fruits=FruitGame.assets.fruits;
