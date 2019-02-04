@@ -71,6 +71,19 @@ body.playing .seperator{
 	/* animation: rainbow .5s steps(36) infinite, pulse .5s infinite; */
 }
 
+.background-frame {
+	background: url(assets/Black.png);
+	width: 100vw;
+	height: 100vh;
+	background-size: 100% 100%;
+	transition: display .2s;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 999;
+	/* animation: rainbow .5s steps(36) infinite, pulse .5s infinite; */
+}
+
 .sliding-background {
 	background: url(assets/BGLOOP_02.jpg) repeat-x;
 	background-size: 2% 100vh;
@@ -301,6 +314,7 @@ body.playing .seperator{
 	</div>
 	<div class="sliding-parallax2 hidden">
 	</div>
+	<div class="background-frame"></div>
 </div>
 <div class="wrapper-left">
 	<div class="sliding-background hidden">
