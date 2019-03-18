@@ -71,88 +71,103 @@
     ui_startFruit.textureObj = textureObj;
     ui_startFruit.side = "middle";
 
-		TweenLite.to(ui_startFruit,1,{scale:1,alpha:1,ease :Back.easeOut});
-		var wrapper = document.getElementsByClassName('wrapper')[0];
-		var wrapperLeft = document.getElementsByClassName('wrapper-left')[0];
-		var wrapperRight = document.getElementsByClassName('wrapper-right')[0];
-		var back = document.getElementsByClassName('regular-background')[0];
-		var slide = document.querySelector('.wrapper .sliding-background');
-		var slideLeft = document.querySelector('.wrapper-left .sliding-background');
-		var slideRight = document.querySelector('.wrapper-right .sliding-background');
-		var parallax = document.querySelector('.wrapper .sliding-parallax');
-		var parallax2 = document.querySelector('.wrapper .sliding-parallax2');
-		var parallaxLeft = document.querySelector('.wrapper-left .sliding-parallax');
-		var parallaxRight = document.querySelector('.wrapper-right .sliding-parallax');
-		var parallaxLeft2 = document.querySelector('.wrapper-left .sliding-parallax2');
-		var parallaxRight2 = document.querySelector('.wrapper-right .sliding-parallax2');
-		slide.className = 'sliding-background hidden';
-		slideLeft.className = 'sliding-background hidden';
-		slideRight.className = 'sliding-background hidden';
-		parallax.className = 'sliding-parallax hidden';
-		parallaxLeft.className = 'sliding-parallax hidden';
-		parallaxRight.className = 'sliding-parallax hidden';
-		parallax2.className = 'sliding-parallax2 hidden';
-		parallaxLeft2.className = 'sliding-parallax2 hidden';
-		parallaxRight2.className = 'sliding-parallax2 hidden';
-		wrapper.className = 'wrapper';
-		wrapperLeft.className = 'wrapper-left';
-		wrapperRight.className = 'wrapper-right';
-		back.className = 'regular-background';
-		// scoresController.getScores();
-		
+    TweenLite.to(ui_startFruit, 1, { scale: 1, alpha: 1, ease: Back.easeOut });
+    var wrapper = document.getElementsByClassName("wrapper")[0];
+    var wrapperLeft = document.getElementsByClassName("wrapper-left")[0];
+    var wrapperRight = document.getElementsByClassName("wrapper-right")[0];
+    var back = document.getElementsByClassName("regular-background")[0];
+    var slide = document.querySelector(".wrapper .sliding-background");
+    var slideLeft = document.querySelector(".wrapper-left .sliding-background");
+    var slideRight = document.querySelector(
+      ".wrapper-right .sliding-background"
+    );
+    var parallax = document.querySelector(".wrapper .sliding-parallax");
+    var parallax2 = document.querySelector(".wrapper .sliding-parallax2");
+    var parallaxLeft = document.querySelector(
+      ".wrapper-left .sliding-parallax"
+    );
+    var parallaxRight = document.querySelector(
+      ".wrapper-right .sliding-parallax"
+    );
+    var parallaxLeft2 = document.querySelector(
+      ".wrapper-left .sliding-parallax2"
+    );
+    var parallaxRight2 = document.querySelector(
+      ".wrapper-right .sliding-parallax2"
+    );
+    slide.className = "sliding-background hidden";
+    slideLeft.className = "sliding-background hidden";
+    slideRight.className = "sliding-background hidden";
+    parallax.className = "sliding-parallax hidden";
+    parallaxLeft.className = "sliding-parallax hidden";
+    parallaxRight.className = "sliding-parallax hidden";
+    parallax2.className = "sliding-parallax2 hidden";
+    parallaxLeft2.className = "sliding-parallax2 hidden";
+    parallaxRight2.className = "sliding-parallax2 hidden";
+    wrapper.className = "wrapper";
+    wrapperLeft.className = "wrapper-left";
+    wrapperRight.className = "wrapper-right";
+    back.className = "regular-background";
+    // scoresController.getScores();
   };
 
+  hideStartGameUI = function() {
+    ui_startFruit.removeEventListener("dead", startGame);
+    createjs.Sound.play("ankYou");
+    if (ui_replayFruit)
+      ui_replayFruit.removeEventListener("dead", replayLastGame);
+    // TweenLite.to(ui_gameTitle.position,0.8,{y:-assetsManager.gametitle.height});
+    TweenLite.to(ui_newGame, 0.8, {
+      scale: 8,
+      alpha: 0,
+      onComplete: function() {
+        // ui_gameTitle.life=0;
+        ui_newGame.life = 0;
+      }
+    });
+    if (multiplayer) {
+      var wrapperLeft = document.getElementsByClassName("wrapper-left")[0];
+      var wrapperRight = document.getElementsByClassName("wrapper-right")[0];
+      var slideLeft = document.querySelector(
+        ".wrapper-left .sliding-background"
+      );
+      var slideRight = document.querySelector(
+        ".wrapper-right .sliding-background"
+      );
+      var parallaxLeft = document.querySelector(
+        ".wrapper-left .sliding-parallax"
+      );
+      var parallaxRight = document.querySelector(
+        ".wrapper-right .sliding-parallax"
+      );
+      var parallaxLeft2 = document.querySelector(
+        ".wrapper-left .sliding-parallax2"
+      );
+      var parallaxRight2 = document.querySelector(
+        ".wrapper-right .sliding-parallax2"
+      );
+      slideLeft.className = "sliding-background";
+      parallaxLeft.className = "sliding-parallax";
+      parallaxLeft2.className = "sliding-parallax2";
+      if (isAutomationLeft) wrapperLeft.className = "wrapper-left frenzy";
 
-	hideStartGameUI = function() {
-	 ui_startFruit.removeEventListener("dead", startGame);
-	 createjs.Sound.play('ankYou')
-	 if (ui_replayFruit)
-		 ui_replayFruit.removeEventListener("dead", replayLastGame);
-	 // TweenLite.to(ui_gameTitle.position,0.8,{y:-assetsManager.gametitle.height});
-	 TweenLite.to(ui_newGame, 0.8, {
-		 scale: 8,
-		 alpha: 0,
-		 onComplete: function() {
-			 // ui_gameTitle.life=0;
-			 ui_newGame.life = 0;
-		 }
-	 });
-	 if (multiplayer) {
-		var wrapperLeft = document.getElementsByClassName('wrapper-left')[0];
-		var wrapperRight = document.getElementsByClassName('wrapper-right')[0];
-		var slideLeft = document.querySelector('.wrapper-left .sliding-background');
-		var slideRight = document.querySelector('.wrapper-right .sliding-background');
-		var parallaxLeft = document.querySelector('.wrapper-left .sliding-parallax');
-		var parallaxRight = document.querySelector('.wrapper-right .sliding-parallax');
-		var parallaxLeft2 = document.querySelector('.wrapper-left .sliding-parallax2');
-		var parallaxRight2 = document.querySelector('.wrapper-right .sliding-parallax2');
-		slideLeft.className = 'sliding-background';
-		parallaxLeft.className = 'sliding-parallax';
-		parallaxLeft2.className = 'sliding-parallax2';
-		if (isAutomationLeft)
-			wrapperLeft.className = 'wrapper-left frenzy';
-
-		slideRight.className = 'sliding-background';
-		parallaxRight.className = 'sliding-parallax';
-		parallaxRight2.className = 'sliding-parallax2';
-		if (isAutomationRight)
-			wrapperRight.className = 'wrapper-right frenzy';
-
-	 } else {
-		var wrapper = document.getElementsByClassName('wrapper')[0];
-		var slide = document.getElementsByClassName('sliding-background')[0];
-		var parallax = document.getElementsByClassName('sliding-parallax')[0];
-		var parallax2 = document.getElementsByClassName('sliding-parallax2')[0];
-		slide.className = 'sliding-background';
-		parallax.className = 'sliding-parallax';
-		parallax2.className = 'sliding-parallax2';
-		if (isAutomation)
-			wrapper.className = 'wrapper frenzy';
-	 }
-	 var back = document.getElementsByClassName("regular-background")[0];
-	 back.className = "regular-background hidden";
- };
-
+      slideRight.className = "sliding-background";
+      parallaxRight.className = "sliding-parallax";
+      parallaxRight2.className = "sliding-parallax2";
+      if (isAutomationRight) wrapperRight.className = "wrapper-right frenzy";
+    } else {
+      var wrapper = document.getElementsByClassName("wrapper")[0];
+      var slide = document.getElementsByClassName("sliding-background")[0];
+      var parallax = document.getElementsByClassName("sliding-parallax")[0];
+      var parallax2 = document.getElementsByClassName("sliding-parallax2")[0];
+      slide.className = "sliding-background";
+      parallax.className = "sliding-parallax";
+      parallax2.className = "sliding-parallax2";
+      if (isAutomation) wrapper.className = "wrapper frenzy";
+    }
+    var back = document.getElementsByClassName("regular-background")[0];
+    back.className = "regular-background hidden";
+  };
 
   showScoreTextUI = function(context, currScore) {
     if (gameState == GAME_READY) {
@@ -170,7 +185,7 @@
     context.font = "36px 'Arial'";
 
     context.setTransform(1, 0, -0.2, 1, 0, 0);
-    context.fillText(currScore, 220, gameHeight - 80);
+    context.fillText(currScore, gameWidth * 0.12, gameHeight - 80);
     context.setTransform(1, 0, 0, 1, 0, 0);
     var side;
     if (context.canvas.id.indexOf("left") !== -1) {
@@ -276,36 +291,72 @@
       );
       ui_scoreIconRight.scale = 0.5;
 
-			ui_scoreIconRight = particleSystem.createParticle(SPP.SpriteImage);
-			ui_scoreIconRight.regX=ui_scoreIconRight.regY=0;
-			ui_scoreIconRight.init(10,gameHeight - 75,Infinity,assetsManager.score,bottomRightContext);
-			ui_scoreIconRight.scale = .5;
-	
-			ui_gameLifeRight = particleSystem.createParticle(SPP.SpriteImage);
-			ui_gameLifeRight.regX=1;
-			ui_gameLifeRight.regY=0;
-			ui_gameLifeRight.scale=.5;
-			ui_gameLifeRight.init(165, bottomRightContext.canvas.height-70,Infinity,ui_gamelifeTextureRight,bottomRightContext);
-		} else {
-			ui_hud = particleSystem.createParticle(SPP.SpriteImage);
-			ui_hud.regX=ui_hud.regY=0;
-			ui_hud.init(0,gameHeight - 105,Infinity,assetsManager.hud,bottomContext);
-			ui_hud.scale = .5
+      ui_scoreIconRight = particleSystem.createParticle(SPP.SpriteImage);
+      ui_scoreIconRight.regX = ui_scoreIconRight.regY = 0;
+      ui_scoreIconRight.init(
+        10,
+        gameHeight - 75,
+        Infinity,
+        assetsManager.score,
+        bottomRightContext
+      );
+      ui_scoreIconRight.scale = 0.5;
 
-			ui_hudPower = particleSystem.createParticle(SPP.SpriteImage);
-			ui_hudPower.regX=ui_hudPower.regY=0;
-			ui_hudPower.init(150,gameHeight - 107,Infinity,assetsManager.hudPower,bottomContext);
-			ui_hudPower.scale = .5
+      ui_gameLifeRight = particleSystem.createParticle(SPP.SpriteImage);
+      ui_gameLifeRight.regX = 1;
+      ui_gameLifeRight.regY = 0;
+      ui_gameLifeRight.scale = 0.5;
+      ui_gameLifeRight.init(
+        165,
+        bottomRightContext.canvas.height - 70,
+        Infinity,
+        ui_gamelifeTextureRight,
+        bottomRightContext
+      );
+    } else {
+      ui_hud = particleSystem.createParticle(SPP.SpriteImage);
+      ui_hud.regX = ui_hud.regY = 0;
+      ui_hud.init(
+        0,
+        gameHeight - 105,
+        Infinity,
+        assetsManager.hud,
+        bottomContext
+      );
+      ui_hud.scale = 0.5;
 
-			ui_hudPowerActive = particleSystem.createParticle(SPP.SpriteImage);
-			ui_hudPowerActive.regX=ui_hudPowerActive.regY=0;
-			ui_hudPowerActive.init(164,gameHeight - 87,Infinity,null,bottomContext);
-			ui_hudPowerActive.scale = .5
+      ui_hudPower = particleSystem.createParticle(SPP.SpriteImage);
+      ui_hudPower.regX = ui_hudPower.regY = 0;
+      ui_hudPower.init(
+        150,
+        gameHeight - 107,
+        Infinity,
+        assetsManager.hudPower,
+        bottomContext
+      );
+      ui_hudPower.scale = 0.5;
 
-			ui_scoreIcon = particleSystem.createParticle(SPP.SpriteImage);
-			ui_scoreIcon.regX=ui_scoreIcon.regY=0;
-			ui_scoreIcon.init(10,gameHeight - 75,Infinity,assetsManager.score,bottomContext);
-			ui_scoreIcon.scale = .5;
+      ui_hudPowerActive = particleSystem.createParticle(SPP.SpriteImage);
+      ui_hudPowerActive.regX = ui_hudPowerActive.regY = 0;
+      ui_hudPowerActive.init(
+        164,
+        gameHeight - 87,
+        Infinity,
+        null,
+        bottomContext
+      );
+      ui_hudPowerActive.scale = 0.5;
+
+      ui_scoreIcon = particleSystem.createParticle(SPP.SpriteImage);
+      ui_scoreIcon.regX = ui_scoreIcon.regY = 0;
+      ui_scoreIcon.init(
+        10,
+        gameHeight - 75,
+        Infinity,
+        assetsManager.score,
+        bottomContext
+      );
+      ui_scoreIcon.scale = 0.5;
 
       ui_gameLife = particleSystem.createParticle(SPP.SpriteImage);
       ui_gameLife.regX = 1;
@@ -321,48 +372,38 @@
     }
   };
 
-    hideScoreUI=function()
-	{
-		if(window.ui_scoreIcon!=undefined)
-		{
-			window.ui_scoreIcon.life=0;
-		}
-		if(window.ui_hud!=undefined)
-		{
-			window.ui_hud.life=0;
-		}
-		if(window.ui_hudPower!=undefined)
-		{
-			window.ui_hudPower.life=0;
-		}
-		if(window.ui_hudPowerActive!=undefined)
-		{
-			window.ui_hudPowerActive.life=0;
-		}
-		if(window.ui_gameLife!=undefined)
-		{
-			window.ui_gameLife.life=0;
-		}
-		if(window.ui_scoreIconLeft!=undefined)
-		{
-			window.ui_scoreIconLeft.life=0;
-		}
-		if(window.ui_gameLifeLeft!=undefined)
-		{
-			window.ui_gameLifeLeft.life=0;
-		}
-		if(window.ui_scoreIconRight!=undefined)
-		{
-			window.ui_scoreIconRight.life=0;
-		}
-		if(window.ui_gameLifeRight!=undefined)
-		{
-			window.ui_gameLifeRight.life=0;
-		}
-	};
+  hideScoreUI = function() {
+    if (window.ui_scoreIcon != undefined) {
+      window.ui_scoreIcon.life = 0;
+    }
+    if (window.ui_hud != undefined) {
+      window.ui_hud.life = 0;
+    }
+    if (window.ui_hudPower != undefined) {
+      window.ui_hudPower.life = 0;
+    }
+    if (window.ui_hudPowerActive != undefined) {
+      window.ui_hudPowerActive.life = 0;
+    }
+    if (window.ui_gameLife != undefined) {
+      window.ui_gameLife.life = 0;
+    }
+    if (window.ui_scoreIconLeft != undefined) {
+      window.ui_scoreIconLeft.life = 0;
+    }
+    if (window.ui_gameLifeLeft != undefined) {
+      window.ui_gameLifeLeft.life = 0;
+    }
+    if (window.ui_scoreIconRight != undefined) {
+      window.ui_scoreIconRight.life = 0;
+    }
+    if (window.ui_gameLifeRight != undefined) {
+      window.ui_gameLifeRight.life = 0;
+    }
+  };
 
   showGameoverUI = function() {
-		endTime = new Date().getTime();
+    endTime = new Date().getTime();
     ui_gameOver = particleSystem.createParticle(SPP.SpriteImage);
     ui_gameOver.init(
       gameWidth * 0.5,
@@ -378,61 +419,71 @@
       ease: Back.linear,
       onComplete: raiseGameOver
     });
-		enterScoreDelay(4);
+    enterScoreDelay(4);
     enterNameDelay(4);
-    document.body.addEventListener("keydown",startNewGame, true);
+    document.body.addEventListener("keydown", startNewGame, true);
   };
-	raiseGameOver = function(){
+  raiseGameOver = function() {
     TweenLite.to(ui_gameOver.position, 0.8, {
       delay: 1,
-			y: gameHeight * 0.15,
+      y: gameHeight * 0.15,
       ease: Back.linear,
       onComplete: gameOverComplete
     });
-	}
-	showGood=function(x=gameWidth*0.5, y=gameHeight*0.5)
-	{
-		var rand = Math.floor((Math.random() * 9999999 + 1));
-		var type;
-		if (rand % 5 === 0){
-			type = "nice";
-		} else if (rand % 5 === 1){
-			type = "wow";
-		} else if (rand % 5 === 2){
-			type = "excellent";
-		} else if (rand % 5 === 3){
-			type = "zinman";
-		} else if (rand % 5 === 4){
-			type = "boom";
-		}
-		good_ui = particleSystem.createParticle(SPP.SpriteImage);
-		good_ui.init(x,y,Infinity,assetsManager[type+'Image'],topContext);
-		good_ui.scale=0;
-		TweenLite.to(good_ui,0.5,{scale:.2,ease :Back.easeOut,onComplete:() => {
-			TweenLite.to(good_ui,0.5,{delay:0,scale:0,ease :Back.easeIn, onComplete:() => {showingGood = false}});
-		}});
-		createjs.Sound.play(type);
-	};
-
-  var startNewGame = async function(e){
-    if (gameState === GAME_OVER){
-        handleName(e)
+  };
+  showGood = function(x = gameWidth * 0.5, y = gameHeight * 0.5) {
+    var rand = Math.floor(Math.random() * 9999999 + 1);
+    var type;
+    if (rand % 5 === 0) {
+      type = "nice";
+    } else if (rand % 5 === 1) {
+      type = "wow";
+    } else if (rand % 5 === 2) {
+      type = "excellent";
+    } else if (rand % 5 === 3) {
+      type = "zinman";
+    } else if (rand % 5 === 4) {
+      type = "boom";
     }
-    if (e.keyCode === 13 && gameState === GAME_OVER ) {
+    good_ui = particleSystem.createParticle(SPP.SpriteImage);
+    good_ui.init(x, y, Infinity, assetsManager[type + "Image"], topContext);
+    good_ui.scale = 0;
+    TweenLite.to(good_ui, 0.5, {
+      scale: 0.2,
+      ease: Back.easeOut,
+      onComplete: () => {
+        TweenLite.to(good_ui, 0.5, {
+          delay: 0,
+          scale: 0,
+          ease: Back.easeIn,
+          onComplete: () => {
+            showingGood = false;
+          }
+        });
+      }
+    });
+    createjs.Sound.play(type);
+  };
+
+  var startNewGame = async function(e) {
+    if (gameState === GAME_OVER) {
+      handleName(e);
+    }
+    if (e.keyCode === 13 && gameState === GAME_OVER) {
       showStartGameUI();
       hideScoreUI();
-			// typeToScreen(a)
+      // typeToScreen(a)
       TweenLite.to(ui_gameOver, 0.1, {
         scale: 0,
         ease: Back.easeIn,
         onComplete: gameoverUIHideComplete
       });
-			await scoresController.insertScore(playerName, score);
-			resetGameData();
-			document.body.removeEventListener("keydown",startNewGame, true);
-      playerName = '';
+      await scoresController.insertScore(playerName, score);
+      resetGameData();
+      document.body.removeEventListener("keydown", startNewGame, true);
+      playerName = "";
     }
-  }
+  };
 
   var gameoverUIHideComplete = function() {
     ui_gameOver.life = 0;
