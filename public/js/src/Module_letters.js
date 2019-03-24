@@ -1,6 +1,6 @@
 (function() {
   neonWrite = function(text, ctx, x, y, fontSize = 30) {
-    ctx.font = fontSize + "em 'Sofia Pro Bold', sans-serif";
+    ctx.font = "700 " + fontSize + "px 'Sofia Pro ', sans-serif";
     ctx.fillStyle = "rgb(255,255,255)";
     ctx.fillText(text, x, y);
     ctx.lineWidth = 1;
@@ -11,7 +11,7 @@
     // ctx.fillText(text, x+3, y);
   };
   blackWrite = function(text, ctx, x, y, fontSize = 30) {
-    ctx.font = fontSize + "em 'Sofia Pro', sans-serif";
+    ctx.font = fontSize + "px 'Sofia Pro 900', sans-serif";
     ctx.fillStyle = "rgb(30,30,30)";
     ctx.fillText(text, x, y);
     ctx.lineWidth = 1;
@@ -32,7 +32,7 @@
   ) {
     return new Promise(resolve => {
       context.fillStyle = "white";
-      context.font = fontSize + "em 'Sofia Pro', sans-serifs";
+      context.font = fontSize + "px 'Sofia Pro Bold', sans-serifs";
       var count = 0;
       var chars;
       function draw() {
@@ -40,7 +40,8 @@
         // Grab all the characters up to count
         chars = text.substr(0, count);
         // Clear the canvas each time draw is called
-        clearText(x - 30, y - 30, fontSize * text.length + 40, fontSize + 90);
+        debugger;
+        clearText(x - 30, y - 30, fontSize * text.length, fontSize + 90);
         // Draw the characters to the canvas
         writingFunc(chars, context, x, y, fontSize);
         // textContext.fillText(chars, x, y);
@@ -61,18 +62,17 @@
     scoreContext.clearRect(x, y, width, height);
   };
   flashInput = function(x, y, char, delay = 150, fontSize = 90) {
-    var textWidth = textContext.measureText(char);
+    var textWidth = textContext.measureText(playerName);
     var spaceWidth = textContext.measureText(" ");
-    var offset =
-      playerName.length * textWidth.width +
-      spaceWidth.width * playerName.length;
+    var offset = textWidth.width + spaceWidth.width * playerName.length;
+    debugger;
     var text = (playerName + "_".repeat(nameLength - playerName.length))
       .split("")
       .join(" ");
     clearText(
       x - 30,
       y - 30,
-      textContext.measureText(text).width + 55,
+      textContext.measureText(text).width + 90,
       fontSize + 90
     );
     neonWrite(text, textContext, x, y, fontSize);
@@ -84,15 +84,12 @@
       fontSize
     ).then(() => {
       if (gameState == GAME_OVER) {
+        debugger;
         window.flashTimer = setTimeout(() => {
           flashInput(x, y, char, delay, fontSize);
         }, delay);
-        clearText(
-          offset + (x - 30),
-          y - 30,
-          textWidth.width + 40,
-          fontSize + 90
-        );
+        var charWidth = textContext.measureText(char);
+        clearText(offset + x - 5, y - 30, charWidth.width + 10, fontSize + 90);
       } else {
         clearText(0, 0, gameWidth, gameHeight);
       }
@@ -106,28 +103,26 @@
     console.log(gameWidth);
     debugger;
     console.log(gameHeight);
-    typeToScreen("ENTER NAME", gameWidth / 2, gameHeight / 3, 0, 5).then(() =>
-      typeToScreen(text, gameWidth / 2, gameHeight * 0.45, 0, 7).then(() =>
-        flashInput(gameWidth / 2, gameHeight * 0.45, "_", 150, 7)
+    typeToScreen("ENTER NAME:", gameWidth / 2, gameHeight / 3, 0, 80).then(() =>
+      typeToScreen(text, gameWidth / 2, gameHeight * 0.45, 0, 112).then(() =>
+        flashInput(gameWidth / 2, gameHeight * 0.45, "_", 150, 112)
       )
     );
   };
   //text, x, y, delay=0, fontSize = 30
   enterScore = function() {
-    debugger;
-    typeToScreen("SCORE:", gameWidth / 6, gameHeight / 3, 0, 5);
-    typeToScreen(score.toString(), gameWidth / 6, gameHeight * 0.45, 0, 7);
+    typeToScreen("SCORE:", gameWidth / 6, gameHeight / 3, 0, 80);
+    typeToScreen(score.toString(), gameWidth / 6, gameHeight * 0.45, 0, 112);
   };
 
   enterScores = function(scores) {
-    debugger;
     scores.forEach(function(score, index) {
       typeToScreen(
         score["username"].toString(),
         gameWidth * 0.7,
         0.326 * gameHeight + index * 0.086 * gameHeight,
         0,
-        2,
+        32,
         blackWrite,
         scoreContext
       );
@@ -136,7 +131,7 @@
         gameWidth * 0.87,
         0.326 * gameHeight + index * 0.086 * gameHeight,
         0,
-        2,
+        32,
         blackWrite,
         scoreContext
       );
