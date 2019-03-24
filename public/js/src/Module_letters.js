@@ -102,17 +102,20 @@
       .join(" ");
     console.log(gameWidth);
     debugger;
+    height = gameHeight < 1100 ? gameHeight * 0.6 : gameHeight * 0.45;
+
     console.log(gameHeight);
     typeToScreen("ENTER NAME:", gameWidth / 2, gameHeight / 3, 0, 80).then(() =>
-      typeToScreen(text, gameWidth / 2, gameHeight * 0.45, 0, 112).then(() =>
-        flashInput(gameWidth / 2, gameHeight * 0.45, "_", 150, 112)
+      typeToScreen(text, gameWidth / 2, height, 0, 112).then(() =>
+        flashInput(gameWidth / 2, height, "_", 150, 112)
       )
     );
   };
   //text, x, y, delay=0, fontSize = 30
   enterScore = function() {
     typeToScreen("SCORE:", gameWidth / 6, gameHeight / 3, 0, 80);
-    typeToScreen(score.toString(), gameWidth / 6, gameHeight * 0.45, 0, 112);
+    height = gameHeight < 1100 ? gameHeight * 0.6 : gameHeight * 0.45;
+    typeToScreen(score.toString(), gameWidth / 6, height, 0, 112);
   };
 
   enterScores = function(scores) {

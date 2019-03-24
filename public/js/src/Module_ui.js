@@ -182,10 +182,10 @@
       bottomContext.fillStyle = "white";
       return;
     }
-    context.font = "36px 'Arial'";
+    context.font = "italic 36px 'Arial'";
 
-    context.setTransform(1, 0, -0.2, 1, 0, 0);
-    context.fillText(currScore, gameWidth * 0.12, gameHeight - 80);
+    debugger;
+    context.fillText(currScore, ui_hud.texture.width * 0.2, gameHeight - 80);
     context.setTransform(1, 0, 0, 1, 0, 0);
     var side;
     if (context.canvas.id.indexOf("left") !== -1) {
