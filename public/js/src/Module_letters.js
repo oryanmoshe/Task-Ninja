@@ -102,7 +102,7 @@
       .join(" ");
     console.log(gameWidth);
     debugger;
-    height = gameHeight < 880 ? gameHeight * 0.6 : gameHeight * 0.45;
+    height = gameHeight < 880 ? gameHeight * 0.6 : gameHeight * 0.5;
 
     console.log(gameHeight);
     typeToScreen("ENTER NAME:", gameWidth / 2, gameHeight / 3, 0, 80).then(() =>
@@ -114,7 +114,7 @@
   //text, x, y, delay=0, fontSize = 30
   enterScore = function() {
     typeToScreen("SCORE:", gameWidth / 6, gameHeight / 3, 0, 80);
-    height = gameHeight < 880 ? gameHeight * 0.6 : gameHeight * 0.45;
+    height = gameHeight < 880 ? gameHeight * 0.6 : gameHeight * 0.5;
     typeToScreen(score.toString(), gameWidth / 6, height, 0, 112);
   };
 
