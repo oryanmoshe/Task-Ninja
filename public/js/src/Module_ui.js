@@ -28,7 +28,7 @@
       ease: Back.easeOut
     });
 
-    if (bladeHistory.length > 0) {
+    if (bladeHistory.length > 0 && false) {
       ui_replayFruit = fruitSystem.createParticle(FruitGame.Fruit);
       ui_replayFruit.addEventListener("dead", replayLastGame);
       var textureObj = assetsManager.getFruitByName("done");
