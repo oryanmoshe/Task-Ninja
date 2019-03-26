@@ -397,10 +397,10 @@ function render() {
   } else {
     var slide = document.querySelector(".wrapper .sliding-background");
     slide.className = "sliding-background stretch";
-    ui_hudPowerActive.texture = assetsManager.slowMoActive;
+    ui_hudPower.texture = assetsManager.slowMoActive;
   }
   if (!isAutomation && !slowMo && !transparency && !isLlamas)
-    ui_hudPowerActive.texture = null;
+    ui_hudPower.texture = assetsManager.hudPower;
   // handtracking.tick();
   powerUpsHistory.push({
     time: new Date().getTime(),
@@ -466,12 +466,12 @@ function render() {
   particleSystem.render();
   if (transparency) {
     middleContext.globalAlpha = 0.3;
-    ui_hudPowerActive.texture = assetsManager.transparencyActive;
+    ui_hudPower.texture = assetsManager.transparencyActive;
   } else {
     middleContext.globalAlpha = 1;
   }
   if (isLlamas) {
-    ui_hudPowerActive.texture = assetsManager.mannActive;
+    ui_hudPower.texture = assetsManager.mannActive;
   }
   if (isAutomation || isAutomationLeft || isAutomationRight) {
     var keys = [];
@@ -545,7 +545,7 @@ function getRandomStartPoint(x, y, radius) {
 }
 
 function runAutomation() {
-  ui_hudPowerActive.texture = assetsManager.automationActive;
+  ui_hudPower.texture = assetsManager.automationActive;
   var l = fruitSystem.getParticles().length;
   var uncutFalling = fruitSystem
     .getParticles()

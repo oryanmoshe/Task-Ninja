@@ -29,22 +29,22 @@ FruitGame.assets = {
     { id: "automationPink", src: "assets/OtemationLogoPink.png" },
     { id: "automationBlue", src: "assets/OtemationLogoBlue.png" },
     { id: "automationGreen", src: "assets/OtemationLogoGreen.png" },
-    { id: "automationActive", src: "assets/OtemationActive.png" },
+    { id: "automationActive", src: "assets/HUD_OtemationActive.png" },
     
     { id: "slowMoPink", src: "assets/TimeLineLogoPink.png" },
     { id: "slowMoBlue", src: "assets/TimeLineLogoBlue.png" },
     { id: "slowMoGreen", src: "assets/TimeLineLogoGreen.png" },
-    { id: "slowMoActive", src: "assets/TimeLineActive.png" },
+    { id: "slowMoActive", src: "assets/HUD_SlowMoActive.png" },
     
     { id: "transparencyPink", src: "assets/ZinmanPink.png" },
     { id: "transparencyBlue", src: "assets/ZinmanBlue.png" },
     { id: "transparencyGreen", src: "assets/ZinmanGreen.png" },
-    { id: "transparencyActive", src: "assets/ZinmanActive.png" },
+    { id: "transparencyActive", src: "assets/HUD_ZinmanActive.png" },
 
     { id: "mannPink", src: "assets/MannPink.png" },
     { id: "mannBlue", src: "assets/MannBlue.png" },
     { id: "mannGreen", src: "assets/MannGreen.png" },
-    { id: "mannActive", src: "assets/MannActive.png" },
+    { id: "mannActive", src: "assets/HUD_MannActive.png" },
 
     { id: "throwFruit", src: "assets/sound/throw-fruit.ogg" },
     { id: "automationActivated", src: "assets/sound/AutomationActivated.mp3" },

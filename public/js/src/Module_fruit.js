@@ -129,6 +129,8 @@
 		p.textureObj=texture;
 		p.side = side;
 		p.bottomY=gameHeight+textureObj.w.height;
+		if (texture.name === 'llama')
+			p.scale = .5
 
 		fruitHistory.push({x, y, yv, rv, life, texture, side: p.side, bottomY: p.bottomY, context, time: new Date().getTime()});
 	};
