@@ -77,7 +77,7 @@
 			left.velocity.rotate(50*Math.random());
 			left.rotation=target.rotation;
 		}
-		if (target.textureObj.name == 'automation' || target.textureObj.name == 'transparency' || target.textureObj.name == 'slowMo' || target.textureObj.name == 'mann' || target.textureObj.name == 'llama'){
+		if (target.textureObj.name == 'automation' || target.textureObj.name == 'transparency' || target.textureObj.name == 'slowMo' || target.textureObj.name == 'mann' || target.textureObj.name == 'llama' || target.textureObj.name == 'kpi'){
 			right.scale = .5;
 			left.scale = .5;
 		}
@@ -162,7 +162,7 @@
 			isAutomation = true;
 		}
 		if (target.textureObj.name === 'transparency'){
-			themeMusic.volume = .5;
+			themeMusic.volume = .2;
 			currentlyPlaying.stop();
 			currentlyPlaying = createjs.Sound.play("transparency"+((rand%6)+1));
 			setTimeout(() => {
@@ -172,6 +172,18 @@
 			setTimeout(() => {
 				transparency = false
 			}, 10000)
+		}
+		if (target.textureObj.name === 'kpi'){
+			themeMusic.volume = .1;
+			currentlyPlaying.stop();
+			currentlyPlaying = createjs.Sound.play("kpi"+((rand%2)+1));
+			setTimeout(() => {
+				themeMusic.volume = 1;
+				ultraSlice = true;
+				setTimeout(() => {
+					ultraSlice = false
+				}, 10000)
+			}, 4500);
 		}
 		if (target.textureObj.name === 'slowMo'){
 			slowMo = true;

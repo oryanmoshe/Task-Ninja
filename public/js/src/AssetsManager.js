@@ -65,7 +65,7 @@ FruitGame.AssetsManager=function()
 		
 		// return this.fruitsObj['mann'];
 		var ret = this.fruitsArray[this.fruitsArray.length*Math.random()>>0];
-		if (ret.name === 'automation' || ret.name === 'slowMo' || ret.name === 'transparency' || ret.name === 'mann'){
+		if (ret.name === 'automation' || ret.name === 'slowMo' || ret.name === 'transparency' || ret.name === 'mann' || ret.name === 'kpi'){
 			var rand = Math.floor((Math.random() * 30 + 1));
 			if (rand % 30 === 0 && !isAutomation && !slowMo && !transparency){
 				return ret;

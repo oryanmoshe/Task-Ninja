@@ -322,9 +322,9 @@ function gameOver(side = "middle") {
 
   setTimeout(() => {
     var rand = Math.floor(Math.random() * 99999 + 1);
-    currentlyPlaying.stop();
     fadeMusic();
     themeMusic.stop();
+    createjs.Sound.stop();
     if (scoresController.scores.length < 5 || score >= scoresController.scores[4].score) {
       currentlyPlaying = createjs.Sound.play("topTen" + ((rand % 2) + 1));
     } else {
@@ -441,7 +441,7 @@ function render() {
     ui_hudPower.position.x = 157.5;
     ui_hudPower.position.y = gameHeight - 96.5;
   }
-  if (!isAutomation && !slowMo && !transparency && !isLlamas){
+  if (!isAutomation && !slowMo && !transparency && !isLlamas && !ultraSlice){
     ui_hudPower.texture = assetsManager.hudPower;
     ui_hudPower.position.x = 150;
     ui_hudPower.position.y = gameHeight - 107;
@@ -519,6 +519,11 @@ function render() {
   }
   if (isLlamas) {
     ui_hudPower.texture = assetsManager.mannActive;
+    ui_hudPower.position.x = 157.5;
+    ui_hudPower.position.y = gameHeight - 96.5;
+  }
+  if (ultraSlice) {
+    ui_hudPower.texture = assetsManager.kpiActive;
     ui_hudPower.position.x = 157.5;
     ui_hudPower.position.y = gameHeight - 96.5;
   }

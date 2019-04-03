@@ -24,7 +24,7 @@ FruitGame.Fruit.prototype.update = function()
 	this.context.translate(this.position.x-20,this.position.y-20);
 	//this.context.rotate(this.rotation);
 	this.context.scale(this.scale,this.scale);
-	if (this.textureObj && (this.textureObj.name === 'automation' || this.textureObj.name === 'slowMo' || this.textureObj.name === 'transparency' || this.textureObj.name === 'mann')){
+	if (this.textureObj && (this.textureObj.name === 'automation' || this.textureObj.name === 'slowMo' || this.textureObj.name === 'transparency' || this.textureObj.name === 'mann' || this.textureObj.name === 'kpi')){
 		updateAutomation += 1/32;
 		if (Math.floor(updateAutomation) % 3 === 0){
 			// this.textureObj = assetsManager.fruitsObj.done;

@@ -1,7 +1,7 @@
 FruitGame.assets = {
-  fruits:       ["done", "working", "stuck",  "automation", "transparency", "slowMo", "llama", "mann"],
-  fruitsLives:  [1,       2,        3,        1,            1,              1,        1,       1],
-  nextFruits:   [null,   "done",   "working", null,         null,           null,     null,    null],
+  fruits:       ["done", "working", "stuck",  "automation", "transparency", "slowMo", "llama", "mann", "kpi"],
+  fruitsLives:  [1,       2,        3,        1,            1,              1,        1,       1,      1],
+  nextFruits:   [null,   "done",   "working", null,         null,           null,     null,    null,   null],
   other: [
     { id: "gameover", src: "assets/gameover.png" },
     { id: "gametitle", src: "assets/gametitle.png" },
@@ -41,6 +41,11 @@ FruitGame.assets = {
     { id: "transparencyGreen", src: "assets/ZinmanGreen.png" },
     { id: "transparencyActive", src: "assets/HUD_ZinmanActive.png" },
 
+    { id: "kpiPink", src: "assets/KPIPink.png" },
+    { id: "kpiBlue", src: "assets/KPIBlue.png" },
+    { id: "kpiGreen", src: "assets/KPIGreen.png" },
+    { id: "kpiActive", src: "assets/HUD_KPIActive.png" },
+
     { id: "mannPink", src: "assets/MannPink.png" },
     { id: "mannBlue", src: "assets/MannBlue.png" },
     { id: "mannGreen", src: "assets/MannGreen.png" },
@@ -62,6 +67,8 @@ FruitGame.assets = {
     { id: "touchMe1", src: "assets/sound/TouchMe_01.mp3" },
     { id: "touchMe2", src: "assets/sound/TouchMe2_01.mp3" },
     { id: "touchMe3", src: "assets/sound/TouchMe3_01.mp3" },
+    { id: "kpi1", src: "assets/sound/KPIActive_01.mp3" },
+    { id: "kpi2", src: "assets/sound/KPIActive_02.mp3" },
     { id: "transparency1", src: "assets/sound/Transparency_01.mp3" },
     { id: "transparency2", src: "assets/sound/Transparency_02.mp3" },
     { id: "transparency3", src: "assets/sound/Transparency_03.mp3" },
