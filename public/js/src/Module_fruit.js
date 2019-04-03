@@ -177,13 +177,16 @@
 			slowMo = true;
 			realSlowmo = true;
 			fadeMusic(30, 'down')
-			slowMoTheme = createjs.Sound.play('slowMoTheme')
+			currentlyPlaying = createjs.Sound.play('slowMoActivated')
 			setTimeout(() => {
-				slowMo = false
-				realSlowmo = false
-				slowMoTheme.stop()
-				fadeMusic(50, 'up');
-			}, 10000)
+				slowMoTheme = createjs.Sound.play('slowMoTheme')
+				setTimeout(() => {
+					slowMo = false
+					realSlowmo = false
+					slowMoTheme.stop()
+					fadeMusic(50, 'up');
+				}, 10000)
+			}, 3000)
 		}
 		if (target.textureObj.name === 'mann'){
 			isLlamas = true;

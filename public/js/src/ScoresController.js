@@ -6,6 +6,14 @@ class ScoresController {
     this.storageRef = firebase.storage().ref();
     this.firestore.settings({ timestampsInSnapshots: true });
   }
+
+  getLastThu(){
+    const now = new Date();
+    const daysAfterLastThursday = (-7 + 4) - now.getDay(); // 7 = number of days in week, 4 = the thursdayIndex (0= sunday)
+    const currentMs = now.getTime();
+    const lastThursday = new Date(currentMs + (daysAfterLastThursday * 24 * 60 * 60 * 1000));
+    return lastThursday;
+  }
   listenToScores() {
     const that = this;
     // const scoresRef = this.database.ref("scores/");

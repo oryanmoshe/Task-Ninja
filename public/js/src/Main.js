@@ -189,7 +189,7 @@ function init() {
 
   scoresController = new ScoresController();
   // scoresController.getScores()
-  scoresController.listenToScores();
+  scoresController.listenToTopScores(scoresController.getLastThu(), null, 5);
   initEvents();
   render();
   enterGame();
@@ -325,7 +325,7 @@ function gameOver(side = "middle") {
     currentlyPlaying.stop();
     fadeMusic();
     themeMusic.stop();
-    if (score >= scoresController.scores[4].score) {
+    if (scoresController.scores.length < 5 || score >= scoresController.scores[4].score) {
       currentlyPlaying = createjs.Sound.play("topTen" + ((rand % 2) + 1));
     } else {
       currentlyPlaying = createjs.Sound.play("gameOver" + ((rand % 5) + 1));
@@ -433,7 +433,7 @@ function render() {
     var slide = document.querySelector(".wrapper .sliding-background");
     slide.className =
       "sliding-background" +
-      (gameState !== GAME_PLAYING && gameState !== REPLAY ? " hidden" : "");
+      (gameState !== GAME_PLAYING && gameState !== REPLAY && gameState !== GAME_OVER ? " hidden" : "");
   } else {
     var slide = document.querySelector(".wrapper .sliding-background");
     slide.className = "sliding-background stretch";

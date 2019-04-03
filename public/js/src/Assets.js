@@ -50,7 +50,7 @@ FruitGame.assets = {
     { id: "automationActivated", src: "assets/sound/AutomationActivated.mp3" },
     { id: "automationMode", src: "assets/sound/Automation_01.mp3" },
     { id: "mainTheme", src: "assets/sound/maintheme.wav" },
-    { id: "slowMoTheme", src: "assets/sound/SlowMoTheme_01.mp4" },
+    { id: "slowMoTheme", src: "assets/sound/SlowMoTheme_01.mp3" },
     { id: "slowMoActivated", src: "assets/sound/SlowMoActivate_01.mp3" },
     { id: "royTheme", src: "assets/sound/RoyTheme2.mp3" },
     { id: "dueDates", src: "assets/sound/DueDates_02.mp3" },
@@ -85,3 +85,6 @@ FruitGame.assets = {
 letters.forEach(l => {
   FruitGame.assets.other.push({id: l, src: `assets/sound/abc/${l}.mp3`})
 })
+for (let i = 0; i < 10; i++){
+  FruitGame.assets.other.push({id: `num${i}`, src: `assets/sound/abc/${i}.mp3`})
+}

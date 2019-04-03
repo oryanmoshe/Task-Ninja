@@ -463,12 +463,12 @@
         });
       }
     });
-    if (!isLlamas && !realSlowMo){
+    if (!isLlamas && !realSlowmo){
       themeMusic.volume = .5;
     }
     currentlyPlaying = createjs.Sound.play(type);
     setTimeout(() => {
-      if (!isLlamas && !realSlowMo){
+      if (!isLlamas && !realSlowmo){
         themeMusic.volume = 1;
       }
     }, 1000);

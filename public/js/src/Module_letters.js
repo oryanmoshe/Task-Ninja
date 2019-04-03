@@ -152,13 +152,13 @@
   handleName = function(e) {
     if (
       ((e.keyCode >= 65 && e.keyCode <= 90) ||
-        (e.keyCode > 48 && e.keyCode < 57) ||
+        (e.keyCode > 48 && e.keyCode < 59) ||
         e.key === "?") &&
       playerName.length < nameLength
     ) {
       playerName += e.key.toUpperCase();
       currentlyPlaying.stop();
-      currentlyPlaying = createjs.Sound.play(e.key === "#" ? "hash" : e.key.toUpperCase());
+      currentlyPlaying = createjs.Sound.play(e.key === "#" ? "hash" : !isNaN(e.key) ? `num${e.key}` : e.key.toUpperCase());
     }
     if (e.keyCode === 8) {
       playerName = playerName.slice(0, -1);
