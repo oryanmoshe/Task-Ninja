@@ -324,6 +324,7 @@ function gameOver(side = "middle") {
     var rand = Math.floor(Math.random() * 99999 + 1);
     currentlyPlaying.stop();
     fadeMusic();
+    themeMusic.stop();
     if (score >= scoresController.scores[4].score) {
       currentlyPlaying = createjs.Sound.play("topTen" + ((rand % 2) + 1));
     } else {
@@ -428,7 +429,7 @@ function render() {
     },
     slowMo ? 20 : 0
   );
-  if (!realSlowmo && !slowMo) {
+  if (!realSlowmo) {
     var slide = document.querySelector(".wrapper .sliding-background");
     slide.className =
       "sliding-background" +

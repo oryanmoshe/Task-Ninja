@@ -1,128 +1,130 @@
-var FruitGame = FruitGame || {
+window.FruitGame = window.FruitGame || {
 	REVISION : '1',
 	AUTHOR : "flashhawk",
 	GITHUB:"https://github.com/flashhawk"
 };
 
-var gameWidth=window.innerWidth;
-var gameHeight=window.innerHeight;
+window.gameWidth=window.innerWidth;
+window.gameHeight=window.innerHeight;
 
-var topCanvas;
-var topContext;
-var middleCanvas;
-var middleContext;
-var bottomCanvas;
-var bottomContext;
-var textCanvas;
-var scoreCanvas;
+window.topCanvas = {};
+window.topContext = {};
+window.middleCanvas = {};
+window.middleContext = {};
+window.bottomCanvas = {};
+window.bottomContext = {};
+window.textCanvas = {};
+window.scoreCanvas = {};
 
-var textContext;
-var scoreContext;
+window.textContext = {};
+window.scoreContext = {};
 
-var topLeftCanvas;
-var topLeftContext;
-var middleLeftCanvas;
-var middleLeftContext;
-var bottomLeftCanvas;
-var bottomLeftContext;
-var bottomLeftScoreContext;
+window.topLeftCanvas = {};
+window.topLeftContext = {};
+window.middleLeftCanvas = {};
+window.middleLeftContext = {};
+window.bottomLeftCanvas = {};
+window.bottomLeftContext = {};
+window.bottomLeftScoreContext = {};
 
-var topRightCanvas;
-var topRightContext;
-var middleRightCanvas;
-var middleRightContext;
-var bottomRightCanvas;
-var bottomRightContext;
-var bottomRightScoreContext;
+window.topRightCanvas = {};
+window.topRightContext = {};
+window.middleRightCanvas = {};
+window.middleRightContext = {};
+window.bottomRightCanvas = {};
+window.bottomRightContext = {};
+window.bottomRightScoreContext = {};
 
-var particleSystem;
-var fruitSystem;
-var bombSystem;
-var bladeSystem;
-var gravity;
+window.particleSystem = {};
+window.fruitSystem = {};
+window.bombSystem = {};
+window.bladeSystem = {};
+window.gravity = {};
 
-var timer=0;
-var interval=1.8;
+window.timer=0;
+window.interval=1.8;
 
 
-var bladeColor;
-var bladeWidth;
+window.bladeColor = {};
+window.bladeWidth = {};
 //game data
-var mouse = {};
-var score;
-var scoreLeft=0;
-var scoreRight=0;
-var gameLife;
-var gameLifeLeft;
-var gameLifeRight;
-var storage;
-var isPlaying;
-var GAME_READY=1,GAME_PLAYING=2,GAME_OVER=3,REPLAY=4;
-var gameState;
-var gameLevel;
-var levelStep=0.0001;
+window.mouse = {};
+window.score = {};
+window.scoreLeft=0;
+window.scoreRight=0;
+window.gameLife = {};
+window.gameLifeLeft = {};
+window.gameLifeRight = {};
+window.storage = {};
+window.isPlaying = {};
+window.GAME_READY=1,GAME_PLAYING=2,GAME_OVER=3,REPLAY=4;
+window.gameState = {};
+window.gameLevel = {};
+window.levelStep=0.0001;
 
 //start game ui
-var ui_gameTitle;
-var ui_newGame;
-var ui_startFruit;
+window.ui_gameTitle = {};
+window.ui_newGame = {};
+window.ui_startFruit = {};
 
-var ui_scoreIcon;
-var ui_gameLife;
-var ui_gamelifeTexture;
-var ui_gameLifeLeft;
-var ui_gamelifeTextureLeft;
-var ui_gameLifeRight;
-var ui_gamelifeTextureRight;
-var ui_gameover;
+window.ui_scoreIcon = {};
+window.ui_gameLife = {};
+window.ui_gamelifeTexture = {};
+window.ui_gameLifeLeft = {};
+window.ui_gamelifeTextureLeft = {};
+window.ui_gameLifeRight = {};
+window.ui_gamelifeTextureRight = {};
+window.ui_gameover = {};
 
 //--collideTest
-var collide;
-var allBlades={};
-var bladeSystems={};
-var bladeColors=['#00FF00', '#FF0000', '#0000FF', '#FFFF00', '#FF00FF', '#00FFFF'];
-var isAutomation=false;
-var isAutomationLeft=false;
-var isAutomationRight=false;
-var automations={};
-var automationStarted;
-var autoIdentifier=30;
+window.collide = {};
+window.allBlades={};
+window.bladeSystems={};
+window.bladeColors=['#00FF00', '#FF0000', '#0000FF', '#FFFF00', '#FF00FF', '#00FFFF'];
+window.isAutomation=false;
+window.isAutomationLeft=false;
+window.isAutomationRight=false;
+window.automations={};
+window.automationStarted = {};
+window.autoIdentifier=30;
 
-var bladeCanvases = {};
-var bladeContexes = {};
-var multiplayer = false;
-var lineDrawn = false;
+window.bladeCanvases = {};
+window.bladeContexes = {};
+window.multiplayer = false;
+window.lineDrawn = false;
 
-var startTime;
-var endTime;
-var bladeHistory=[];
-var fruitHistory=[];
-var cutHistory=[];
-var bladeReplayIdentifier=100;
-var bombUpdate;
+window.startTime = {};
+window.endTime = {};
+window.bladeHistory=[];
+window.fruitHistory=[];
+window.cutHistory=[];
+window.bladeReplayIdentifier=100;
+window.bombUpdate = {};
 
-var slowMo = false;
+window.slowMo = false;
 
-var updateHud;
-var updateHudLeft;
-var updateHudRight;
-var updateAutomation=0;
+window.updateHud = {};
+window.updateHudLeft = {};
+window.updateHudRight = {};
+window.updateAutomation=0;
 var ui_replayFruit;
 
-var transparency = false;
-var ultraSlice = false;
-var playerName='';
-var nameLength=3;
-var powerUpsHistory=[];
-var showGood;
-var showingGood=false;
-var ui_hudPowerActive={};
-var ui_hudPower={position: {}};
-var scoresController;
-var getStats;
-var isLlamas=false;
-var letters= ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '@', '!', '&'];
-var themeMusic = {};
-var realSlowmo = false;
+window.transparency = false;
+window.ultraSlice = false;
+window.playerName='';
+window.nameLength=3;
+window.powerUpsHistory=[];
+window.showGood = {};
+window.showingGood=false;
+window.ui_hudPowerActive={};
+window.ui_hudPower={position: {}};
+window.scoresController = {};
+window.getStats = {};
+window.isLlamas=false;
+window.letters= ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '@', '!', '&'];
+window.themeMusic = {};
+window.realSlowmo = false;
 
-var currentlyPlaying = {};
+window.currentlyPlaying = {};
+window.royTheme = {};
+window.slowMoTheme = {};
