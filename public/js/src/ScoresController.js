@@ -168,7 +168,7 @@ class ScoresController {
         stats: getStats(),
         date
       })
-      console.log("Document successfully written!", docRef.id);
+      // console.log("Document successfully written!", docRef.id);
       return docRef.id
     } catch(err) {
       console.error("Error writing document: ", err);
