@@ -100,11 +100,9 @@
     var text = (playerName + "_".repeat(nameLength - playerName.length))
       .split("")
       .join(" ");
-    console.log(gameWidth);
     
     height = gameHeight < 880 ? gameHeight * 0.6 : gameHeight * 0.5;
 
-    console.log(gameHeight);
     typeToScreen("ENTER NAME:", gameWidth / 2, gameHeight / 3, 0, 80).then(() =>
       typeToScreen(text, gameWidth / 2, height, 0, 112).then(() =>
         flashInput(gameWidth / 2, height, "_", 150, 112)

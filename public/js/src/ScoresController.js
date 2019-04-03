@@ -129,12 +129,12 @@ class ScoresController {
       statsId,
     })
     .then(function(docRef) {
-        console.log("Document successfully written!", docRef.id);
+        // console.log("Document successfully written!", docRef.id);
 
         Webcam.snap(function(data_uri) {
           var pictureRef = storageRef.child(`score_image/${docRef.id}.png`);
           pictureRef.putString(data_uri, 'data_url').then(function(snapshot) {
-            console.log(`Uploaded image: ${pictureRef.fullPath}`);
+            // console.log(`Uploaded image: ${pictureRef.fullPath}`);
           });
         });
     })
