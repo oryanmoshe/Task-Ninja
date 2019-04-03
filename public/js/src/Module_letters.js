@@ -152,7 +152,7 @@
   handleName = function(e) {
     if (
       ((e.keyCode >= 65 && e.keyCode <= 90) ||
-        (e.keyCode > 48 && e.keyCode < 59) ||
+        (e.keyCode >= 48 && e.keyCode <= 58) ||
         e.key === "?") &&
       playerName.length < nameLength
     ) {

@@ -60,7 +60,6 @@ FruitGame.AssetsManager=function()
 	};
 	this.getRandomFruit=function()
 	{
-		// return this.fruitsObj['transparency'];
 		if (isLlamas)
 			return this.fruitsObj.llama
 		

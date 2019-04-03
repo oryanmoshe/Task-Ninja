@@ -186,7 +186,7 @@
 					slowMoTheme.stop()
 					fadeMusic(50, 'up');
 				}, 10000)
-			}, 3000)
+			}, 2000)
 		}
 		if (target.textureObj.name === 'mann'){
 			isLlamas = true;
