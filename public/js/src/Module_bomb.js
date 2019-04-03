@@ -65,14 +65,19 @@
 			smoke.velocity.rotate(360 * Math.random());
 			smoke.addForce("g", gravity);
 		}
-		createjs.Sound.stop();
-		createjs.Sound.play("bombExplode");
+		currentlyPlaying.stop();
+		themeMusic.volume = .5;
+		currentlyPlaying = createjs.Sound.play("bombExplode");
 	};
 	throwBomb = function(context) {
 		var rand = Math.floor((Math.random() * 999999 + 1));
 		if (rand % 10 === 0 && !isAutomation) {
 			// createjs.Sound.stop();
-			createjs.Sound.play("dueDates");
+			themeMusic.volume = .5;
+			currentlyPlaying = createjs.Sound.play("dueDates");
+			setTimeout(() => {
+				themeMusic.volume = 1;
+			}, 3000);
 		}
 		var p = bombSystem.createParticle(FruitGame.Fruit);
 		var yv = -(10 + Math.random() * 3);

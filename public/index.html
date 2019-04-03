@@ -194,6 +194,8 @@ body.playing .seperator{
 .wrapper-right.frenzy{
 	animation: rainbow .4s steps(36) infinite;
 }
+#camera video{opacity: 0; width:320px;height:240px;}
+#camera canvas{opacity: 0; width:320px;height:240px;}
 @keyframes slide {
   0%{
     transform: translate3d(0, 0, 0);
@@ -268,6 +270,8 @@ body.playing .seperator{
 <script src="https://www.gstatic.com/firebasejs/5.7.2/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/5.7.2/firebase-database.js"></script>
 <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-storage.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.25/webcam.min.js"></script>
 <script>
   // Initialize Firebase
   var config = {
@@ -355,5 +359,7 @@ body.playing .seperator{
 
 <div id="loading" style="display:block" ></div>
 <div class="seperator"></div>
+<div id="camera">
+</div>
 </body>
 </html>

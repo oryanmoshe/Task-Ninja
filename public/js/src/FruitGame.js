@@ -117,8 +117,12 @@ var powerUpsHistory=[];
 var showGood;
 var showingGood=false;
 var ui_hudPowerActive={};
-var ui_hudPower={};
+var ui_hudPower={position: {}};
 var scoresController;
 var getStats;
-var isLlamas=true;
+var isLlamas=false;
 var letters= ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '@', '!', '&'];
+var themeMusic = {};
+var realSlowmo = false;
+
+var currentlyPlaying = {};

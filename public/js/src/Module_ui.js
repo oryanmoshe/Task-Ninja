@@ -25,7 +25,8 @@
     TweenLite.to(ui_newGame, 0.8, {
       scale: 0.55,
       alpha: 1,
-      ease: Back.easeOut
+      ease: Back.easeOut,
+      onComplete: scoresController.topScores
     });
 
     if (bladeHistory.length > 0 && false) {
@@ -113,7 +114,7 @@
 
   hideStartGameUI = function() {
     ui_startFruit.removeEventListener("dead", startGame);
-    createjs.Sound.play("ankYou");
+    currentlyPlaying = createjs.Sound.play("ankYou");
     if (ui_replayFruit)
       ui_replayFruit.removeEventListener("dead", replayLastGame);
     // TweenLite.to(ui_gameTitle.position,0.8,{y:-assetsManager.gametitle.height});
@@ -184,7 +185,7 @@
     }
     context.font = "italic 36px 'Arial'";
 
-    debugger;
+    
     context.fillText(currScore, ui_hud.texture.width * 0.2, gameHeight - 80);
     context.setTransform(1, 0, 0, 1, 0, 0);
     var side;
@@ -462,7 +463,11 @@
         });
       }
     });
-    createjs.Sound.play(type);
+    themeMusic.volume = .5;
+    currentlyPlaying = createjs.Sound.play(type);
+    setTimeout(() => {
+      themeMusic.volume = 1;
+    }, 1000);
   };
 
   var startNewGame = async function(e) {

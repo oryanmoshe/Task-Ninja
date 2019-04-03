@@ -40,7 +40,7 @@
         // Grab all the characters up to count
         chars = text.substr(0, count);
         // Clear the canvas each time draw is called
-        debugger;
+        
         clearText(x - 30, y - 30, fontSize * text.length, fontSize + 90);
         // Draw the characters to the canvas
         writingFunc(chars, context, x, y, fontSize);
@@ -65,7 +65,7 @@
     var textWidth = textContext.measureText(playerName);
     var spaceWidth = textContext.measureText(" ");
     var offset = textWidth.width + spaceWidth.width * playerName.length;
-    debugger;
+    
     var text = (playerName + "_".repeat(nameLength - playerName.length))
       .split("")
       .join(" ");
@@ -84,7 +84,7 @@
       fontSize
     ).then(() => {
       if (gameState == GAME_OVER) {
-        debugger;
+        
         window.flashTimer = setTimeout(() => {
           flashInput(x, y, char, delay, fontSize);
         }, delay);
@@ -101,7 +101,7 @@
       .split("")
       .join(" ");
     console.log(gameWidth);
-    debugger;
+    
     height = gameHeight < 880 ? gameHeight * 0.6 : gameHeight * 0.5;
 
     console.log(gameHeight);
@@ -157,8 +157,8 @@
       playerName.length < nameLength
     ) {
       playerName += e.key.toUpperCase();
-      createjs.Sound.stop();
-      createjs.Sound.play(e.key === "#" ? "hash" : e.key.toUpperCase());
+      currentlyPlaying.stop();
+      currentlyPlaying = createjs.Sound.play(e.key === "#" ? "hash" : e.key.toUpperCase());
     }
     if (e.keyCode === 8) {
       playerName = playerName.slice(0, -1);

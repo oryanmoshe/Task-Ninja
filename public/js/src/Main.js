@@ -172,6 +172,20 @@ function init() {
   // handtracking = new HandTracking(topCanvas.width, topCanvas.height);
   // handtracking.tracker.params.simple = true;
   // handtracking.addEventListener('handmove', handmove);
+  Webcam.set({
+		width: 320,
+		height: 240,
+		dest_width: 640,
+		dest_height: 480,
+		image_format: 'png',
+		force_flash: false,
+		flip_horiz: true,
+		fps: 45
+  });
+  Webcam.attach('#camera')
+  themeMusic = createjs.Sound.createInstance('mainTheme');
+  themeMusic.loop = -1;
+  themeMusic.volume = 1;
 
   scoresController = new ScoresController();
   // scoresController.getScores()
@@ -230,6 +244,11 @@ function startGame(e) {
   resetGameData();
   showScoreUI();
   gameState = GAME_PLAYING;
+  setTimeout(() =>{
+    themeMusic.play();
+    themeMusic.loop = -1;
+    themeMusic.volume = 1;
+  }, 1000)
   if (multiplayer) {
     document.body.className += " playing";
   }
@@ -303,17 +322,37 @@ function gameOver(side = "middle") {
 
   setTimeout(() => {
     var rand = Math.floor(Math.random() * 99999 + 1);
-    createjs.Sound.stop();
+    currentlyPlaying.stop();
+    fadeMusic();
     if (score >= scoresController.scores[4].score) {
-      createjs.Sound.play("topTen" + ((rand % 2) + 1));
+      currentlyPlaying = createjs.Sound.play("topTen" + ((rand % 2) + 1));
     } else {
-      createjs.Sound.play("gameOver" + ((rand % 5) + 1));
+      currentlyPlaying = createjs.Sound.play("gameOver" + ((rand % 5) + 1));
     }
   }, 1000);
   showGameoverUI();
 }
 function gameOverComplete() {
   replay();
+}
+
+function fadeMusic(speed = 50, direction='down'){
+  let count = 0;
+  if (direction == 'down'){
+    for (let i = 100; i>=0; i-=10){
+      count++;
+      setTimeout(() => {
+        themeMusic.volume = i / 100;
+      }, speed* count)
+    }
+  } else {
+    for (let i = 0; i<=100; i+=10){
+      count++;
+      setTimeout(() => {
+        themeMusic.volume = i / 100;
+      }, speed* count)
+    }
+  }
 }
 
 function replay(e) {
@@ -389,7 +428,7 @@ function render() {
     },
     slowMo ? 20 : 0
   );
-  if (!slowMo) {
+  if (!realSlowmo && !slowMo) {
     var slide = document.querySelector(".wrapper .sliding-background");
     slide.className =
       "sliding-background" +
@@ -398,9 +437,14 @@ function render() {
     var slide = document.querySelector(".wrapper .sliding-background");
     slide.className = "sliding-background stretch";
     ui_hudPower.texture = assetsManager.slowMoActive;
+    ui_hudPower.position.x = 157.5;
+    ui_hudPower.position.y = gameHeight - 96.5;
   }
-  if (!isAutomation && !slowMo && !transparency && !isLlamas)
+  if (!isAutomation && !slowMo && !transparency && !isLlamas){
     ui_hudPower.texture = assetsManager.hudPower;
+    ui_hudPower.position.x = 150;
+    ui_hudPower.position.y = gameHeight - 107;
+  }
   // handtracking.tick();
   powerUpsHistory.push({
     time: new Date().getTime(),
@@ -467,11 +511,15 @@ function render() {
   if (transparency) {
     middleContext.globalAlpha = 0.3;
     ui_hudPower.texture = assetsManager.transparencyActive;
+    ui_hudPower.position.x = 157.5;
+    ui_hudPower.position.y = gameHeight - 96.5;
   } else {
     middleContext.globalAlpha = 1;
   }
   if (isLlamas) {
     ui_hudPower.texture = assetsManager.mannActive;
+    ui_hudPower.position.x = 157.5;
+    ui_hudPower.position.y = gameHeight - 96.5;
   }
   if (isAutomation || isAutomationLeft || isAutomationRight) {
     var keys = [];
@@ -489,14 +537,16 @@ function render() {
       var wrapper = document.getElementsByClassName(wrapClass)[0];
       if (!(key in automations)) {
         slowMo = true;
-        createjs.Sound.stop();
-        createjs.Sound.play("automationActivated");
+        currentlyPlaying.stop();
+        fadeMusic(20, 'down')
+        currentlyPlaying = createjs.Sound.play("automationActivated");
         automations[key] = new Date().getTime();
         setTimeout(() => {
+          themeMusic.paused = true;
           slowMo = false;
           wrapper.className = wrapClass + " frenzy";
-          createjs.Sound.stop();
-          createjs.Sound.play("automationMode");
+          currentlyPlaying.stop();
+          currentlyPlaying = createjs.Sound.play("automationMode");
         }, 2000);
       } else {
         if (new Date().getTime() - automations[key] > 12000) {
@@ -507,6 +557,9 @@ function render() {
             isAutomationRight = false;
           } else {
             isAutomation = false;
+
+            themeMusic.paused = false;
+            fadeMusic(20, 'up')
           }
           slowMo = true;
           setTimeout(() => (slowMo = false), 5000);
@@ -546,6 +599,9 @@ function getRandomStartPoint(x, y, radius) {
 
 function runAutomation() {
   ui_hudPower.texture = assetsManager.automationActive;
+  ui_hudPower.position.x = 157.5;
+  ui_hudPower.position.y = gameHeight - 96.5;
+
   var l = fruitSystem.getParticles().length;
   var uncutFalling = fruitSystem
     .getParticles()

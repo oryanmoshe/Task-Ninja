@@ -129,8 +129,10 @@
 		p.textureObj=texture;
 		p.side = side;
 		p.bottomY=gameHeight+textureObj.w.height;
-		if (texture.name === 'llama')
+		if (texture.name === 'llama'){
 			p.scale = .5
+			p.velocity.reset(0, yv * 1.5)
+		}
 
 		fruitHistory.push({x, y, yv, rv, life, texture, side: p.side, bottomY: p.bottomY, context, time: new Date().getTime()});
 	};
@@ -151,7 +153,7 @@
 			}
 		}
 		var rand = Math.floor((Math.random() * 9999999 + 1));
-		if (rand % 10 === 0 && !showingGood && !isAutomation){
+		if (rand % 15 === 0 && !showingGood && !isAutomation){
 			showGood(target.position.x, target.position.y);
 			showingGood=true;
 		}
@@ -160,18 +162,34 @@
 			isAutomation = true;
 		}
 		if (target.textureObj.name === 'transparency'){
-			createjs.Sound.stop();
-			createjs.Sound.play("transparency"+((rand%6)+1));
+			themeMusic.volume = .5;
+			currentlyPlaying.stop();
+			currentlyPlaying = createjs.Sound.play("transparency"+((rand%6)+1));
+			setTimeout(() => {
+				themeMusic.volume = 1;
+			}, 2000);
 			transparency = true;
-			setTimeout(() => transparency = false, 10000)
+			setTimeout(() => {
+				transparency = false
+			}, 10000)
 		}
 		if (target.textureObj.name === 'slowMo'){
 			slowMo = true;
-			setTimeout(() => slowMo = false, 10000)
+			realSlowmo = true;
+			setTimeout(() => {
+				slowMo = false
+				realSlowmo = false
+			}, 10000)
 		}
 		if (target.textureObj.name === 'mann'){
 			isLlamas = true;
-			setTimeout(() => isLlamas = false, 10000)
+			fadeMusic(30, 'down')
+			currentlyPlaying = createjs.Sound.play('royTheme')
+			setTimeout(() => {
+				isLlamas = false
+				currentlyPlaying.stop()
+				fadeMusic(50, 'up');
+			}, 10000)
 		}
 		// buildJuice(target,(Math.random()*30>>0)+30);
 		// buildSplash(target);
