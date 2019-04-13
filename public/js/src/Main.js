@@ -526,6 +526,7 @@ function render() {
     ui_hudPower.texture = assetsManager.kpiActive;
     ui_hudPower.position.x = 157.5;
     ui_hudPower.position.y = gameHeight - 96.5;
+  } else {
   }
   if (isAutomation || isAutomationLeft || isAutomationRight) {
     var keys = [];
@@ -576,7 +577,11 @@ function render() {
 
     if (Object.keys(automations).length > 0) {
       runAutomation();
-      interval = 0.4;
+      if (new Date().getTime() - automations[key] > 9000) {
+        interval = 0.7;
+      } else {
+        interval = 0.4;
+      }
     } else {
       interval = 1.8;
     }

@@ -128,3 +128,4 @@ window.realSlowmo = false;
 window.currentlyPlaying = {};
 window.royTheme = {};
 window.slowMoTheme = {};
+window.kpiTheme = {};

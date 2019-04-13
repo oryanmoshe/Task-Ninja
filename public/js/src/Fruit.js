@@ -3,6 +3,8 @@ FruitGame.Fruit=function()
 	SPP.Particle.call(this);
 	this.drawTexture=function(context,texture,x,y)
 	{
+		if(ultraSlice && this.textureObj && this.textureObj.name !== 'bomb')
+			context.filter = 'grayscale(100%) invert(72%) sepia(16%) saturate(1274%) hue-rotate(83deg) brightness(93%) contrast(89%)';
 		context.drawImage
 		(
 			texture, x,y,
@@ -13,8 +15,8 @@ FruitGame.Fruit=function()
 			texture.width,
 			texture.height
 		);
+		context.filter = 'none';
 	};
-	//this.onUpdate=null;
 };
 FruitGame.Fruit.prototype = SPP.inherit(SPP.Particle.prototype);
 FruitGame.Fruit.prototype.constructor = FruitGame.Fruit;

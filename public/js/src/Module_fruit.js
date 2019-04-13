@@ -174,16 +174,21 @@
 			}, 10000)
 		}
 		if (target.textureObj.name === 'kpi'){
-			themeMusic.volume = .1;
+			// themeMusic.volume = .1;
+			fadeMusic(30, 'down')
+			let sound = "kpi"+((rand%2)+1)
 			currentlyPlaying.stop();
-			currentlyPlaying = createjs.Sound.play("kpi"+((rand%2)+1));
+			currentlyPlaying = createjs.Sound.play(sound);
 			setTimeout(() => {
-				themeMusic.volume = 1;
+				// themeMusic.volume = 1;
+				kpiTheme = createjs.Sound.play('kpiTheme')
 				ultraSlice = true;
 				setTimeout(() => {
 					ultraSlice = false
+					kpiTheme.stop()
+					fadeMusic(50, 'up');
 				}, 10000)
-			}, 4500);
+			}, sound == 'kpi1' ? 3000 : 4500);
 		}
 		if (target.textureObj.name === 'slowMo'){
 			slowMo = true;
@@ -257,7 +262,7 @@
 			ui_gamelifeTextureRight=assetsManager["gamelife-"+gameLifeRight];
 			ui_gameLifeRight.texture=ui_gamelifeTextureRight;
 		} else {
-			gameLife-=(e.target.dropScore - 1);
+			gameLife-=0//(e.target.dropScore - 1);
 			if(gameLife<=0)gameOver('middle');
 			if(gameLife<0)gameLife=0;
 			ui_gamelifeTexture=assetsManager["gamelife-"+gameLife];

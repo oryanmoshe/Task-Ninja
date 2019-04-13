@@ -56,6 +56,7 @@ FruitGame.assets = {
     { id: "automationMode", src: "assets/sound/Automation_01.mp3" },
     { id: "mainTheme", src: "assets/sound/maintheme.wav" },
     { id: "slowMoTheme", src: "assets/sound/SlowMoTheme_01.mp3" },
+    { id: "kpiTheme", src: "assets/sound/kpiTheme.mpeg" },
     { id: "slowMoActivated", src: "assets/sound/SlowMoActivate_01.mp3" },
     { id: "royTheme", src: "assets/sound/RoyTheme2.mp3" },
     { id: "dueDates", src: "assets/sound/DueDates_02.mp3" },
