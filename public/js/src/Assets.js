@@ -4,21 +4,23 @@ FruitGame.assets = {
   nextFruits:   [null,   "done",   "working", null,         null,           null,     null,    null,   null],
   other: [
     { id: "gameover", src: "assets/gameover.png" },
-    { id: "gametitle", src: "assets/gametitle.png" },
     { id: "shadow", src: "assets/shadow.png" },
     { id: "bomb", src: "assets/bomb.png" },
     { id: "bomblight", src: "assets/bomb-light.png" },
     { id: "miss", src: "assets/miss.png" },
-    { id: "star", src: "assets/star.png" },
     { id: "score", src: "assets/score.png" },
+    { id: "star", src: "assets/star.png" },
+
     { id: "hud", src: "assets/hud.png" },
     { id: "hudPower", src: "assets/hudPower.png" },
     { id: "hudbad", src: "assets/hudbad.png" },
+
     { id: "gamelife-5", src: "assets/5Life.png" },
     { id: "gamelife-4", src: "assets/4Life.png" },
     { id: "gamelife-3", src: "assets/3Life.png" },
     { id: "gamelife-2", src: "assets/2Life.png" },
     { id: "gamelife-1", src: "assets/1Life.png" },
+
     { id: "zinmanImage", src: "assets/zinman.png" },
     { id: "niceImage", src: "assets/Nice.png" },
     { id: "wowImage", src: "assets/wow.png" },
@@ -51,43 +53,49 @@ FruitGame.assets = {
     { id: "mannGreen", src: "assets/MannGreen.png" },
     { id: "mannActive", src: "assets/HUD_MannActive.png" },
 
-    { id: "throwFruit", src: "assets/sound/throw-fruit.ogg" },
     { id: "automationActivated", src: "assets/sound/AutomationActivated.mp3" },
+    { id: "slowMoActivated", src: "assets/sound/SlowMoActivate_01.mp3" },
+
     { id: "automationMode", src: "assets/sound/Automation_01.mp3" },
     { id: "mainTheme", src: "assets/sound/maintheme.wav" },
     { id: "slowMoTheme", src: "assets/sound/SlowMoTheme_01.mp3" },
     { id: "kpiTheme", src: "assets/sound/kpiTheme.mpeg" },
-    { id: "slowMoActivated", src: "assets/sound/SlowMoActivate_01.mp3" },
     { id: "royTheme", src: "assets/sound/RoyTheme2.mp3" },
+
     { id: "dueDates", src: "assets/sound/DueDates_02.mp3" },
+
     { id: "gameOver1", src: "assets/sound/GameOver_01.mp3" },
     { id: "gameOver2", src: "assets/sound/GameOver_02.mp3" },
     { id: "gameOver3", src: "assets/sound/GameOver_03.mp3" },
     { id: "gameOver4", src: "assets/sound/GameOver_04.mp3" },
     { id: "gameOver5", src: "assets/sound/GameOver_05.mp3" },
+    { id: "topTen1", src: "assets/sound/TopTen1_01.mp3" },
+    { id: "topTen2", src: "assets/sound/TopTen2_01.mp3" },
+
     { id: "touchMe1", src: "assets/sound/TouchMe_01.mp3" },
     { id: "touchMe2", src: "assets/sound/TouchMe2_01.mp3" },
     { id: "touchMe3", src: "assets/sound/TouchMe3_01.mp3" },
+
     { id: "kpi1", src: "assets/sound/KPIActive_01.mp3" },
     { id: "kpi2", src: "assets/sound/KPIActive_02.mp3" },
+
     { id: "transparency1", src: "assets/sound/Transparency_01.mp3" },
     { id: "transparency2", src: "assets/sound/Transparency_02.mp3" },
     { id: "transparency3", src: "assets/sound/Transparency_03.mp3" },
     { id: "transparency4", src: "assets/sound/Transparency_04.mp3" },
     { id: "transparency5", src: "assets/sound/Transparency_05.mp3" },
     { id: "transparency6", src: "assets/sound/Transparency_06.mp3" },
-    { id: "topTen1", src: "assets/sound/TopTen1_01.mp3" },
-    { id: "topTen2", src: "assets/sound/TopTen2_01.mp3" },
+    
     { id: "zinman", src: "assets/sound/Zinman_01.mp3" },
     { id: "excellent", src: "assets/sound/Excellent.mp3" },
     { id: "wow", src: "assets/sound/WOW.mp3" },
     { id: "nice", src: "assets/sound/NICE.mp3" },
     { id: "boom", src: "assets/sound/Boom.mp3" },
+
     { id: "bombExplode", src: "assets/sound/bomb-explode.mp3" },
     { id: "ankYou", src: "assets/sound/ankYou2.m4a" },
     { id: "?", src: "assets/sound/abc/questionMark.mp3" },
     { id: "hash", src: "assets/sound/abc/hash.mp3" },
-    { id: "splatter", src: "assets/sound/splatter.ogg" }
   ]
 };
 letters.forEach(l => {

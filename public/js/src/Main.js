@@ -3,8 +3,16 @@ window.onload = loadAssets;
 
 function loadAssets() {
   assetsManager = new FruitGame.AssetsManager();
-  assetsManager.addEventListener("complete", init);
+  assetsManager.addEventListener("complete", preInit);
   assetsManager.start();
+}
+function preInit(){
+  document.getElementsByTagName('body')[0].requestFullscreen()
+  setTimeout(()=>{
+    window.gameWidth=window.innerWidth;
+    window.gameHeight=window.innerHeight;
+    init()
+  }, 2000)
 }
 function init() {
   document.getElementById("loading").style.display = "none";
