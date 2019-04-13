@@ -903,82 +903,82 @@ function initEvents() {
     topCanvas.addEventListener("touchmove", touchesHandler, true);
     topCanvas.addEventListener("touchend", touchesHandler, true);
     topCanvas.addEventListener("touchcancel", touchesHandler, true);
-    document.body.addEventListener(
-      "keydown",
-      e => {
-        if (e.keyCode === 13) {
-          isAutomationLeft = true;
-        }
-      },
-      true
-    );
-    document.body.addEventListener(
-      "keydown",
-      e => {
-        if (e.keyCode === 8) {
-          isAutomationRight = true;
-        }
-      },
-      true
-    );
+    // document.body.addEventListener(
+    //   "keydown",
+    //   e => {
+    //     if (e.keyCode === 13) {
+    //       isAutomationLeft = true;
+    //     }
+    //   },
+    //   true
+    // );
+    // document.body.addEventListener(
+    //   "keydown",
+    //   e => {
+    //     if (e.keyCode === 8) {
+    //       isAutomationRight = true;
+    //     }
+    //   },
+    //   true
+    // );
   } else {
     topCanvas.addEventListener("touchstart", touchesHandler, true);
     topCanvas.addEventListener("touchmove", touchesHandler, true);
     topCanvas.addEventListener("touchend", touchesHandler, true);
     topCanvas.addEventListener("touchcancel", touchesHandler, true);
 
-    document.body.addEventListener(
-      "keydown",
-      e => {
-        if (e.keyCode === 9) {
-          gameOver();
-        }
-      },
-      true
-    );
+    // document.body.addEventListener(
+    //   "keydown",
+    //   e => {
+    //     if (e.keyCode === 9) {
+    //       gameOver();
+    //     }
+    //   },
+    //   true
+    // );
 
     //enter
-    document.body.addEventListener(
-      "keydown",
-      e => {
-        if (e.keyCode === 13 && gameState !== GAME_OVER) {
-          isAutomation = true;
-        }
-      },
-      true
-    );
+    // document.body.addEventListener(
+    //   "keydown",
+    //   e => {
+    //     if (e.keyCode === 13 && gameState !== GAME_OVER) {
+    //       isAutomation = true;
+    //     }
+    //   },
+    //   true
+    // );
     //shift
-    document.body.addEventListener(
-      "keydown",
-      e => {
-        if (e.keyCode === 16) {
-          slowMo = !slowMo;
-        }
-      },
-      true
-    );
+    // document.body.addEventListener(
+    //   "keydown",
+    //   e => {
+    //     if (e.keyCode === 16) {
+    //       slowMo = !slowMo;
+    //     }
+    //   },
+    //   true
+    // );
     //backspace
-    document.body.addEventListener(
-      "keydown",
-      e => {
-        if (e.keyCode === 8 && gameState === GAME_PLAYING) {
-          transparency = !transparency;
-        }
-      },
-      true
-    );
+    // document.body.addEventListener(
+    //   "keydown",
+    //   e => {
+    //     if (e.keyCode === 8 && gameState === GAME_PLAYING) {
+    //       transparency = !transparency;
+    //     }
+    //   },
+    //   true
+    // );
     //escape
-    document.body.addEventListener(
-      "keydown",
-      e => {
-        if (e.keyCode === 27) {
-          ultraSlice = !ultraSlice;
-        }
-      },
-      true
-    );
-    if (gameState == GAME_OVER) {
-    }
+    // document.body.addEventListener(
+    //   "keydown",
+    //   e => {
+    //     if (e.keyCode === 27) {
+    //       ultraSlice = !ultraSlice;
+    //     }
+    //   },
+    //   true
+    // );
+    // if (gameState == GAME_OVER) {
+    // }
   }
 }
 

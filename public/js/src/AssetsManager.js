@@ -13,6 +13,11 @@ FruitGame.AssetsManager=function()
 	this.loader = new createjs.LoadQueue();
 	this.loader.installPlugin(createjs.Sound);
 	this.loader.setMaxConnections(20);
+	this.powerUps = []
+
+	var powerupOnScreen=function(){
+		return fruitSystem.getParticles().filter(obj => _this.powerUps.includes(obj.texture)).length > 0
+	}
 	var handleComplete=function()
 	{
 		var fruits=FruitGame.assets.fruits;
@@ -38,6 +43,10 @@ FruitGame.AssetsManager=function()
 			_this[other[i].id]=_this.loader.getResult(other[i].id);
 		};
 		_this.dispatchEvent(new SPP.Event("complete"));
+
+		_this.powerUps = [_this.fruitsObj.automation.w, _this.fruitsObj.slowMo.w,
+									  	_this.fruitsObj.transparency.w, _this.fruitsObj.mann.w,
+											_this.fruitsObj.kpi.w]
 	};
 	this.loader.addEventListener("complete", handleComplete);
 	
@@ -67,7 +76,7 @@ FruitGame.AssetsManager=function()
 		var ret = this.fruitsArray[this.fruitsArray.length*Math.random()>>0];
 		if (ret.name === 'automation' || ret.name === 'slowMo' || ret.name === 'transparency' || ret.name === 'mann' || ret.name === 'kpi'){
 			var rand = Math.floor((Math.random() * 30 + 1));
-			if (rand % 30 === 0 && !isAutomation && !slowMo && !transparency && !isLlamas && !ultraSlice){
+			if (rand % 30 === 0 && !isAutomation && !slowMo && !transparency && !isLlamas && !ultraSlice && !powerupOnScreen()){
 				return ret;
 			}
 			return this.getRandomFruit();

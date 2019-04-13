@@ -262,7 +262,7 @@
 			ui_gamelifeTextureRight=assetsManager["gamelife-"+gameLifeRight];
 			ui_gameLifeRight.texture=ui_gamelifeTextureRight;
 		} else {
-			gameLife-=0//(e.target.dropScore - 1);
+			gameLife-=(e.target.dropScore - 1);
 			if(gameLife<=0)gameOver('middle');
 			if(gameLife<0)gameLife=0;
 			ui_gamelifeTexture=assetsManager["gamelife-"+gameLife];
