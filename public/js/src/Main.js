@@ -585,7 +585,7 @@ function render() {
 
     if (Object.keys(automations).length > 0) {
       runAutomation();
-      if (new Date().getTime() - automations[key] > 9000) {
+      if (new Date().getTime() - Object.values(automations)[0] > 9000) {
         interval = 0.7;
       } else {
         interval = 0.4;
