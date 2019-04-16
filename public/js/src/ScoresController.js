@@ -122,11 +122,13 @@ class ScoresController {
     // const key = `${username}_${date}`;
     // const scoreRef = this.database.ref("scores/" + key);
     const statsId = await this.insertStats(username)
+    const location = await getLocation();
     this.firestore.collection('scores').add({
       username,
       score,
       date,
       statsId,
+      location
     })
     .then(function(docRef) {
         // console.log("Document successfully written!", docRef.id);

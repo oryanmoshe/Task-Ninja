@@ -430,6 +430,16 @@ function handmove(e) {
   buildBladeParticle(e.x, e.y, "mouse");
   console.log(e);
 }
+async function getLocation() {
+  const resp = await fetch('http://www.geoplugin.net/json.gp');
+  const data = await resp.json();
+  return {
+    ip: data.geoplugin_request,
+    country: data.geoplugin_countryName,
+    countryCode: data.geoplugin_countryCode,
+    city: data.geoplugin_city
+  }
+}
 //render canvas
 function render() {
   setTimeout(

@@ -131,3 +131,4 @@ window.slowMoTheme = {};
 window.kpiTheme = {};
 window.gameOverTime = null;
 window.startNewGame = {};
+window.getLocation = {};
