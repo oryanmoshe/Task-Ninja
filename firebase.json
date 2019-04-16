@@ -20,7 +20,8 @@
             "source": "**",
             "destination": "/index.html"
           }
-        ]
+        ],
+        "predeploy": "uglifyjs -m toplevel,eval -c -o public/dist/bundle.js public/js/src/FruitGame.js public/js/src/*.js"
     },
     {
       "target": "dashboard",
