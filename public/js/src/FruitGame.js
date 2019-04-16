@@ -129,3 +129,5 @@ window.currentlyPlaying = {};
 window.royTheme = {};
 window.slowMoTheme = {};
 window.kpiTheme = {};
+window.gameOverTime = null;
+window.startNewGame = {};

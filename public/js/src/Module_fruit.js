@@ -244,7 +244,7 @@
 	missHandler=function(e)
 	{
 		e.target.removeEventListener("dead",missHandler);
-		if ((e.target.dropScore - 1) === 0 || transparency){
+		if ((e.target.dropScore - 1) === 0 || transparency || ultraSlice){
 			return
 		}
 		if(gameState==GAME_OVER)return;

@@ -1,5 +1,17 @@
 {
   "projects": {
     "default": "taskninja-2743c"
+  },
+  "targets": {
+    "taskninja-2743c": {
+      "hosting": {
+        "game": [
+          "taskninja-2743c"
+        ],
+        "dashboard": [
+          "dashboard-galactica"
+        ]
+      }
+    }
   }
 }

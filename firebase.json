@@ -1,23 +1,40 @@
 {
-  "hosting": {
-    "public": "public",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
-    "headers": [ {
-      "source": "**/*.@(jpg|jpeg|gif|png|mp3|m4a|ogg)",
-      "headers": [ {
-        "key": "Cache-Control",
-        "value": "max-age=7200"
-      } ]
-    }],
-    "rewrites": [
+  "hosting": [
       {
+        "target": "game",    
+        "public": "public",
+        "ignore": [
+          "firebase.json",
+          "**/.*",
+          "**/node_modules/**"
+        ],
+        "headers": [ {
+          "source": "**/*.@(jpg|jpeg|gif|png|mp3|m4a|ogg)",
+          "headers": [ {
+            "key": "Cache-Control",
+            "value": "max-age=7200"
+          } ]
+        }],
+        "rewrites": [
+          {
+            "source": "**",
+            "destination": "/index.html"
+          }
+        ]
+    },
+    {
+      "target": "dashboard",
+      "public": "dashboard/build",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [{
         "source": "**",
         "destination": "/index.html"
-      }
-    ]
-  }
+      }],
+      "predeploy": "npm run build --prefix dashboard"
+    }
+  ]
 }

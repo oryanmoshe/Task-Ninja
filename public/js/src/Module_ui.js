@@ -474,11 +474,11 @@
     }, 1000);
   };
 
-  var startNewGame = async function(e) {
+  startNewGame = async function(e) {
     if (gameState === GAME_OVER) {
       handleName(e);
     }
-    if (e.keyCode === 13 && gameState === GAME_OVER) {
+    if ((e.timeout || e.keyCode === 13) && gameState === GAME_OVER) {
       showStartGameUI();
       hideScoreUI();
       // typeToScreen(a)

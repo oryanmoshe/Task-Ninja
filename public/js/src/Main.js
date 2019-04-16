@@ -228,6 +228,7 @@ function resetGameData() {
   clearText();
   updateAutomation = 0;
   gameLevel = 0.1;
+  gameOverTime = null;
 }
 function startGame(e) {
   hideStartGameUI();
@@ -308,7 +309,7 @@ function gameOver(side = "middle") {
     fruitSystem.getParticles()[l].removeEventListener("dead", missHandler);
   }
   gameState = GAME_OVER;
-
+  gameOverTime = new Date();
   if (multiplayer) {
     if (side === "left") {
       gameLifeLeft = 0;
@@ -513,7 +514,9 @@ function render() {
     clearText();
     clearScores();
   }
-
+  if (gameState === GAME_OVER && gameOverTime && (new Date().getTime() - gameOverTime.getTime() > 60000)){
+    startNewGame({timeout:true})
+  }
   fruitSystem.render();
   bombSystem.render();
   particleSystem.render();
