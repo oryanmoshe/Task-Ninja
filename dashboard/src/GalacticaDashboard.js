@@ -183,7 +183,7 @@ class GalacticaDashboard extends PureComponent {
               <StatBox label="Avg. Game Length" value={(this.getAvgGameLenMs() / 1000 / 60).toFixed(2)} suffix=" Mins" />
             </Grid>
             <Grid item xs={12} lg={12}>
-              <Leaderboard top={scores.slice(0, 5)} />
+              <Leaderboard top={scores.filter(obj => obj.username).slice(0, 40)} />
             </Grid>
             <Grid item xs={12} lg={6}>
               <HighchartsReact
